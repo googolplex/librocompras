@@ -10,8 +10,8 @@ import org.openxava.util.*;
 @Entity
 @Table(name="PROVEEDOR",
 uniqueConstraints={
-        @UniqueConstraint(name="mr_no_repetir_descripcion", columnNames={"PRV_NOMBRE"}),
-        @UniqueConstraint(name="mr_no_repetir_codigo", columnNames={"PRV_CODIGO"})
+        @UniqueConstraint(name="PRV_NOMBRE_DUPLICADO", columnNames={"PRV_NOMBRE"}),
+        // @UniqueConstraint(name="PRV_CODIGO_DUPLICADO", columnNames={"PRV_CODIGO"})
 })
 public class Proveedor extends SuperClaseFeliz {
 	@Required
@@ -23,29 +23,29 @@ public class Proveedor extends SuperClaseFeliz {
 	private String nombre ;
 
 	@Required
-	@Column(length=100,nullable=false,name="PRV_CIUDAD")	
+	@Column(length=100,nullable=true,name="PRV_CIUDAD")	
 	private String ciudad ;	
 	
 	@Stereotype("MEMO")
 	@Required
-	@Column(length=500,nullable=false,name="PRV_DIRECCION")	
+	@Column(length=200,nullable=true,name="PRV_DIRECCION")	
 	private String direccion ;	
 
 	@Required
-	@Column(length=50,nullable=false,name="PRV_TELEFONO1")	
+	@Column(length=50,nullable=true,name="PRV_TELEFONO1")	
 	private String telefono1 ;	
 
 	@Required
-	@Column(length=50,nullable=false,name="PRV_TELEFONO2")	
+	@Column(length=50,nullable=true,name="PRV_TELEFONO2")	
 	private String telefono2 ;	
 	
 	@Required
-	@Column(length=50,nullable=false,name="PRV_TELEFONO3")	
+	@Column(length=50,nullable=true,name="PRV_TELEFONO3")	
 	private String telefono3 ;	
 	
 	@Stereotype("EMAIL")
 	@Required
-	@Column(length=100,nullable=false,name="PRV_EMAIL")	
+	@Column(length=100,nullable=true,name="PRV_EMAIL")	
 	private String email ;	
 	
 	

@@ -11,9 +11,10 @@
     	<provider>org.hibernate.ejb.HibernatePersistence</provider>
     	<non-jta-data-source>java://comp/env/jdbc/librocomprasv3</non-jta-data-source>
     	<class>org.openxava.session.GalleryImage</class>
-    	<class>org.openxava.web.editors.DiscussionComment</class>
+    	<!-- para que no me creee la tabla discussion comments 2017
+    			<class>org.openxava.web.editors.DiscussionComment</class> -->
         <properties>
-            <property name="hibernate.dialect" value="org.hibernate.dialect.Oracle10gDialect"/>
+            <property name="hibernate.dialect" value="org.hibernate.dialect.Oracle10gDialect"/>            
         </properties>
     </persistence-unit>    
         
@@ -21,7 +22,7 @@
     <!-- Junit lavaderov3 ORACLE desarrollo -->
     <persistence-unit name="junit">
     	<provider>org.hibernate.ejb.HibernatePersistence</provider>
-    	<class>org.openxava.web.editors.DiscussionComment</class>
+    	<!-- <class>org.openxava.web.editors.DiscussionComment</class> -->
         <properties>
 			<property name="hibernate.connection.driver_class" value="oracle.jdbc.OracleDriver"/>
 			<property name="hibernate.dialect" value="org.hibernate.dialect.Oracle10gDialect"/>
