@@ -7,12 +7,16 @@ import org.openxava.annotations.*;
 import org.openxava.util.*;
 // import com.compufiber.validadores.*;
 
+
+//@View(members="ventasNro,fechaventas;sucursal,cliente;empleado,formadepago,estadoventa ; detalles; wexento,wgravado,wiva,wtotal;nrotjch")
+
 @Entity
 @Table(name="PROVEEDOR",
 uniqueConstraints={
         @UniqueConstraint(name="PRV_NOMBRE_DUPLICADO", columnNames={"PRV_NOMBRE"})
         ,@UniqueConstraint(name="PRV_CODIGO_DUPLICADO", columnNames={"PRV_CODIGO"})        
 })
+@Tab(properties="codigo,nombre,ciudad",defaultOrder="nombre")
 public class Proveedor extends SuperClaseFeliz {
 	@Required
 	@Column(length=20,nullable=false,name="PRV_CODIGO")
