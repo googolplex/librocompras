@@ -10,8 +10,8 @@ import org.openxava.util.*;
 @Entity
 @Table(name="PROVEEDOR",
 uniqueConstraints={
-        @UniqueConstraint(name="mr_no_repetir_descripcion", columnNames={"descripcion"}),
-        @UniqueConstraint(name="mr_no_repetir_codigo", columnNames={"codigo"})
+        @UniqueConstraint(name="mr_no_repetir_descripcion", columnNames={"PRV_NOMBRE"}),
+        @UniqueConstraint(name="mr_no_repetir_codigo", columnNames={"PRV_CODIGO"})
 })
 public class Proveedor extends SuperClaseFeliz {
 	@Required
