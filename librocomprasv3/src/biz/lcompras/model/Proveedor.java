@@ -10,8 +10,8 @@ import org.openxava.util.*;
 @Entity
 @Table(name="PROVEEDOR",
 uniqueConstraints={
-        @UniqueConstraint(name="PRV_NOMBRE_DUPLICADO", columnNames={"PRV_NOMBRE"}),
-        // @UniqueConstraint(name="PRV_CODIGO_DUPLICADO", columnNames={"PRV_CODIGO"})
+        @UniqueConstraint(name="PRV_NOMBRE_DUPLICADO", columnNames={"PRV_NOMBRE"})
+        ,@UniqueConstraint(name="PRV_CODIGO_DUPLICADO", columnNames={"PRV_CODIGO"})        
 })
 public class Proveedor extends SuperClaseFeliz {
 	@Required
@@ -22,29 +22,23 @@ public class Proveedor extends SuperClaseFeliz {
 	@Column(length=80,nullable=false,name="PRV_NOMBRE")	
 	private String nombre ;
 
-	@Required
 	@Column(length=100,nullable=true,name="PRV_CIUDAD")	
 	private String ciudad ;	
 	
 	@Stereotype("MEMO")
-	@Required
 	@Column(length=200,nullable=true,name="PRV_DIRECCION")	
 	private String direccion ;	
 
-	@Required
 	@Column(length=50,nullable=true,name="PRV_TELEFONO1")	
 	private String telefono1 ;	
 
-	@Required
 	@Column(length=50,nullable=true,name="PRV_TELEFONO2")	
 	private String telefono2 ;	
 	
-	@Required
 	@Column(length=50,nullable=true,name="PRV_TELEFONO3")	
 	private String telefono3 ;	
 	
 	@Stereotype("EMAIL")
-	@Required
 	@Column(length=100,nullable=true,name="PRV_EMAIL")	
 	private String email ;	
 	
