@@ -18,11 +18,11 @@ public class Contribuyente extends SuperClaseFeliz  {
 	
 	@Required
 	@Column(length=10,nullable=false,name="CTE_CODIGO")	
-	private Long cteCodigo ;	
+	private Long ctecodigo ;	
 	
 	@Required
 	@Column(length=40,nullable=false,name="CTE_NOMBRE")	
-	private String cteNombre ;
+	private String ctenombre ;
 
 	@Required
 	@Pattern(regexp="^(SI|NO)$",message="Solo SI / NO ")	
@@ -30,21 +30,20 @@ public class Contribuyente extends SuperClaseFeliz  {
 	private String activo ;
 	
 
-
-	public Long getCteCodigo() {
-		return cteCodigo;
+	public Long getCtecodigo() {
+		return ctecodigo;
 	}
 
-	public void setCteCodigo(Long cteCodigo) {
-		this.cteCodigo = cteCodigo;
+	public void setCtecodigo(Long ctecodigo) {
+		this.ctecodigo = ctecodigo;
 	}
 
-	public String getCteNombre() {
-		return cteNombre;
+	public String getCtenombre() {
+		return ctenombre;
 	}
 
-	public void setCteNombre(String cteNombre) {
-		this.cteNombre = cteNombre.toUpperCase().trim();
+	public void setCtenombre(String ctenombre) {
+		this.ctenombre = ctenombre.toUpperCase().trim();
 	}
 
 	public String getActivo() {
