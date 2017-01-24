@@ -13,22 +13,23 @@ import org.openxava.util.*;
 @Table(name="RETENCIONES"
  , uniqueConstraints={
         @UniqueConstraint(name="RET_FACTURA_DUPLICADA", columnNames={"factura"})
-        , @UniqueConstraint(name="RET_COMPROBANTE_DUPLICADO", columnNames={"comprobante"})        
+        , @UniqueConstraint(name="RET_COMPROBANTE_DUPLICADO", columnNames={"numeroComprobante"})        
  }
 )
+@Tab(properties="fecha,contribuyente.cteCodigo,cliente.cliNombre,factura,numeroComprobante,montoTotal,totalRet",defaultOrder="fecha")
 public class Retenciones extends SuperClaseFeliz  {
 
 	// ejemplo de FOREIGN KEY CONTRIBUYENTE
-	@DescriptionsList(descriptionProperties="cteNombre")
+	@DescriptionsList(descriptionProperties="cteCodigo,cteNombre")
 	@ManyToOne(fetch=FetchType.LAZY,optional=false)	
-	@JoinColumn(name="CONTRIBUYENTE_ID")
+	@JoinColumn(name="CONTRIBUYENTE_ID", referencedColumnName="ID")
 	private Contribuyente contribuyente ;
 	
 	// ejemplo de FOREIGN KEY AGENTE (PROVEEDOR)
-	@DescriptionsList(descriptionProperties="nombre")
+	@DescriptionsList(descriptionProperties="cliCodigo,cliNombre")
 	@ManyToOne(fetch=FetchType.LAZY,optional=false)	
-	@JoinColumn(name="AGENTE_ID")
-	private Proveedor proveedor ;	
+	@JoinColumn(name="AGENTE_ID", referencedColumnName="ID")
+	private Cliente cliente ;	
 	
 	@Required
 	@Pattern(regexp="^[0-9]+-*[0-9]$",message="No es un numero tipo RUC NNNNNNNNN-N ")
@@ -46,41 +47,42 @@ public class Retenciones extends SuperClaseFeliz  {
 	private String factura ;
 	
 	@Required
-	// @Digits(integer=15,fraction=0)
+	// @Digits(integer=20,fraction=0)
 	@Min(0)  // posiblemente para todos los montos que no son calculados
-	@Stereotype("MONEY")
-	@Column(length=20,nullable=false,name="MONTOBASE")	
+	// @Stereotype("MONEY")
+	@Column(length=20,nullable=false,name="MONTOBASE",scale=0)	
 	private Double montoBase ;
 	
 	@Required
-	// @Digits(integer=15,fraction=0)
-	@Stereotype("MONEY")
-	@Column(length=20,nullable=false,name="MONTOIVA")	
+	// @Digits(integer=20,fraction=0)
+	//@Stereotype("MONEY")
+	@Column(length=20,nullable=false,name="MONTOIVA",scale=0)	
 	private Double montoIva ;
 	
 	@Required
-	// @Digits(integer=15,fraction=0)
-	@Stereotype("MONEY")
-	@Column(length=20,nullable=false,name="MONTOTOTAL")	
+	// @Digits(integer=20,fraction=0)
+	// @Stereotype("MONEY")
+	@Column(length=20,nullable=false,name="MONTOTOTAL",scale=0)	
 	private Double montoTotal ;
 	
 	@Required
 	@Min(0)  // posiblemente para todos los montos que no son calculados
 	@Max(100)
-	@Column(length=5,nullable=false,name="PORCENTAJERET")	
+	// @Digits(integer=5,fraction=0)
+	@Column(length=5,nullable=false,name="PORCENTAJERET",scale=2)	
 	private Double porcentajeRet ;
 
 	@Required
-	// @Digits(integer=15,fraction=0)
-	@Stereotype("MONEY")
-	@Column(length=20,nullable=false,name="MONTORET")	
+	// @Digits(integer=20,fraction=0)
+	// @Stereotype("MONEY")
+	@Column(length=20,nullable=false,name="MONTORET",scale=0)	
 	private Double montoRet ;
 	
 	@Required
 	// posiblemente sera un campo calculado (no por ahora)
 	// @Digits(integer=15,fraction=0)
-	@Stereotype("MONEY")
-	@Column(length=20,nullable=false,name="TOTALRET")	
+	// @Stereotype("MONEY")
+	@Column(length=20,nullable=false,name="TOTALRET",scale=0)	
 	private Double totalRet ;
 	
 	@Required
@@ -88,6 +90,7 @@ public class Retenciones extends SuperClaseFeliz  {
 	private Long numeroComprobante ;
 	
 	@Required
+	@Stereotype("MEMO")
 	@Column(length=250,nullable=false,name="RESPONSABLERET")	
 	private String responsableRet ;
 	
@@ -100,6 +103,7 @@ public class Retenciones extends SuperClaseFeliz  {
 	@Column(nullable=false,name="TIMBRADOHASTA")	
 	private Date timbradoFchHasta ;
 	
+
 	
 	public Contribuyente getContribuyente() {
 		return contribuyente;
@@ -111,13 +115,14 @@ public class Retenciones extends SuperClaseFeliz  {
 	}
 
 
-	public Proveedor getProveedor() {
-		return proveedor;
+
+	public Cliente getCliente() {
+		return cliente;
 	}
 
 
-	public void setProveedor(Proveedor proveedor) {
-		this.proveedor = proveedor;
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
 	}
 
 

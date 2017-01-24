@@ -8,11 +8,12 @@ import javax.validation.constraints.*;
 import org.openxava.annotations.*;
 import org.openxava.util.*;
 
-//@Entity
-@Table(name="LIBROCOMPRAS",
-uniqueConstraints={
-        @UniqueConstraint(name="LCO_ID_DUPLICADO", columnNames={"ID"})
-})
+// @Entity
+//@Table(name="LIBROCOMPRAS"
+      // ,uniqueConstraints={
+      //   @UniqueConstraint(name="LCO_ID_DUPLICADO", columnNames={"ID"})
+      //  }
+//)
 public class LibroCompras extends SuperClaseFeliz  {
 	
 	@Required

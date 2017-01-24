@@ -9,10 +9,10 @@ import org.openxava.annotations.*;
 import org.openxava.util.*;
 
 //@Entity
-@Table(name="LIBROVENTAS",
-uniqueConstraints={
-        @UniqueConstraint(name="LVE_ID_DUPLICADO", columnNames={"ID"})
-})
+// @Table(name="LIBROVENTAS"
+// ,uniqueConstraints={
+//        @UniqueConstraint(name="LVE_ID_DUPLICADO", columnNames={"ID"})}
+//)
 public class LibroVentas extends SuperClaseFeliz  {
 	
 	@Required
