@@ -3,6 +3,7 @@ package biz.lcompras.model;
 import java.util.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.*;
 
 import org.openxava.annotations.*;
 import org.openxava.util.*;
@@ -17,77 +18,82 @@ public class LibroCompras extends SuperClaseFeliz  {
 	@Required
 	@Stereotype("DATE")
 	@Column(nullable=false,name="LC_FECHA")	
-	private Date lcfecha ;
+	private Date lcFecha ;
 	
 	@Required
+	@Pattern(regexp="^[0-9]+-*[0-9]$",message="No es un numero tipo RUC NNNNNNNNN-N ")
 	@Column(length=20,nullable=false,name="LC_PROVEEDOR_RUC")	
-	private String lcproveedorruc ;
+	private String lcProveedorRuc ;
 	
 	@Required
+	// @Digits(integer=15,fraction=0)
+	@Min(0) // para los montos no calculados
 	@Stereotype("MONEY")
 	@Column(length=20,nullable=false,name="LC_MONTOEXENTO")	
-	private Double lcexento ;
+	private Double lcExento ;
 	
 	@Required
 	@Column(length=20,nullable=false,name="LC_TOTALGRAVADA10")	
-	private Double lctotalgravada10 ;
+	private Double lcTotalGravada10 ;
 	
 	@Required
 	@Stereotype("MONEY")
 	@Column(length=20,nullable=false,name="LC_MONTOIVA10")	
-	private Double lcmontoiva10 ;
+	private Double lcMontoIva10 ;
 	
 	@Required
 	@Column(length=20,nullable=false,name="LC_TOTALGRAVADAS5")	
-	private Double lctotalgravadas5 ;
+	private Double lcTotalGravadas5 ;
 	
-	@Required
-	@Stereotype("MONEY")
+	@Required	@Stereotype("MONEY")
 	@Column(length=20,nullable=false,name="LC_MONTOIVA5")	
-	private Double lcmontoiva5 ;
+	private Double lcMontoIva5 ;
 	
 	@Required
+	// @Digits(integer=15,fraction=0)
+	@Min(0) // para los montos no calculados
 	@Stereotype("MONEY")
 	@Column(length=20,nullable=false,name="LC_MONTOTOTAL")	
-	private Double lcmontototal ;
+	private Double lcMontoTotal ;
 	
 	@Required
 	@Column(length=10,nullable=false,name="LC_CONTRIBUYENTE")	
-	private Long lccontribuyente ;
+	private Long lcContribuyente ;
 	
 	@Required
 	@Column(length=4,nullable=false,name="LC_TIPOIVA")	
-	private Long lctipoiva ;
+	private Long lcTipoIva ;
 	
 	@Required
 	@Stereotype("MONEY")
 	@Column(length=20,nullable=false,name="LC_MONTOBASE10")	
-	private Double lcmontobase10 ;
+	private Double lcMontoBase10 ;
 	
 	@Required
 	@Stereotype("MONEY")
 	@Column(length=20,nullable=false,name="LC_MONTOBASE5")	
-	private Double lcmontobase5 ;
+	private Double lcMontoBase5 ;
 	
 	@Required
+	@Pattern(regexp="^[0-9]+-+[0-9]+-+[0-9]+$",message="No es un numero tipo FACTURA NNNN-NNNNN-NNNN ")
 	@Column(length=20,nullable=false,name="LC_NUMEROFACTURA")	
-	private String lcnumerofactura ;
+	private String lcNumeroFactura ;
 	
 	@Required
 	@Column(length=6,nullable=false,name="LC_PERIODO")	
-	private Long lcperiodo ;
+	private Long lcPeriodo ;
 	
 	@Required
 	@Column(length=20,nullable=false,name="LC_NROFACT2")	
-	private Long lcnrofact2 ;
+	private Long lcNroFact2 ;
 	
 	@Required
 	@Column(length=200,nullable=false,name="COMPRASALFA")	
-	private String comprasalfa ;
+	private String comprasAlfa ;
 	
 	@Required
 	@Column(length=200,nullable=false,name="PAGOSALFA")	
-	private String pagosalfa ;
+	private String pagosAlfa ;
 	
 	@Required
 	@Column(length=200,nullable=false,name="CUENTA")	
@@ -95,7 +101,7 @@ public class LibroCompras extends SuperClaseFeliz  {
 	
 	@Required
 	@Column(length=200,nullable=false,name="CONTRACUENTA")	
-	private String contracuenta ;
+	private String contraCuenta ;
 	
 	
 	@PreUpdate
