@@ -15,7 +15,8 @@ uniqueConstraints={
 public class LibroVentas extends SuperClaseFeliz  {
 	
 	@Required
-	@Column(length=200,nullable=false,name="LV_FECHA")	
+	@Stereotype("DATE")
+	@Column(nullable=false,name="LV_FECHA")	
 	private Date lvfecha ;
 	
 	@Required
@@ -23,28 +24,32 @@ public class LibroVentas extends SuperClaseFeliz  {
 	private String lvclienteruc ;
 	
 	@Required
+	@Stereotype("MONEY")
 	@Column(length=20,nullable=false,name="LV_MONTOEXENTO")	
-	private Long lvexento ;
+	private Double lvexento ;
 	
 	@Required
 	@Column(length=20,nullable=false,name="LV_TOTALGRAVADA10")	
-	private Long lvtotalgravada10 ;
+	private Double lvtotalgravada10 ;
 	
 	@Required
+	@Stereotype("MONEY")
 	@Column(length=20,nullable=false,name="LV_MONTOIVA10")	
-	private Long lvmontoiva10 ;
+	private Double lvmontoiva10 ;
 	
 	@Required
 	@Column(length=20,nullable=false,name="LV_TOTALGRAVADAS5")	
-	private Long lvtotalgravadas5 ;
+	private Double lvtotalgravadas5 ;
 	
 	@Required
+	@Stereotype("MONEY")
 	@Column(length=20,nullable=false,name="LV_MONTOIVA5")	
-	private Long lvmontoiva5 ;
+	private Double lvmontoiva5 ;
 	
 	@Required
+	@Stereotype("MONEY")
 	@Column(length=20,nullable=false,name="LV_MONTOTOTAL")	
-	private Long lvmontototal ;
+	private Double lvmontototal ;
 	
 	@Required
 	@Column(length=10,nullable=false,name="LV_CONTRIBUYENTE")	
@@ -55,12 +60,14 @@ public class LibroVentas extends SuperClaseFeliz  {
 	private Long lvtipoiva ;
 	
 	@Required
+	@Stereotype("MONEY")
 	@Column(length=20,nullable=false,name="LV_MONTOBASE10")	
-	private Long lvmontobase10 ;
+	private Double lvmontobase10 ;
 	
 	@Required
+	@Stereotype("MONEY")
 	@Column(length=20,nullable=false,name="LV_MONTOBASE5")	
-	private Long lvmontobase5 ;
+	private Double lvmontobase5 ;
 	
 	@Required
 	@Column(length=20,nullable=false,name="LV_NUMEROFACTURA")	

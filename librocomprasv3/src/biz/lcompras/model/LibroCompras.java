@@ -15,7 +15,8 @@ uniqueConstraints={
 public class LibroCompras extends SuperClaseFeliz  {
 	
 	@Required
-	@Column(length=200,nullable=false,name="LC_FECHA")	
+	@Stereotype("DATE")
+	@Column(nullable=false,name="LC_FECHA")	
 	private Date lcfecha ;
 	
 	@Required
@@ -23,28 +24,32 @@ public class LibroCompras extends SuperClaseFeliz  {
 	private String lcproveedorruc ;
 	
 	@Required
+	@Stereotype("MONEY")
 	@Column(length=20,nullable=false,name="LC_MONTOEXENTO")	
-	private Long lcexento ;
+	private Double lcexento ;
 	
 	@Required
 	@Column(length=20,nullable=false,name="LC_TOTALGRAVADA10")	
-	private Long lctotalgravada10 ;
+	private Double lctotalgravada10 ;
 	
 	@Required
+	@Stereotype("MONEY")
 	@Column(length=20,nullable=false,name="LC_MONTOIVA10")	
-	private Long lcmontoiva10 ;
+	private Double lcmontoiva10 ;
 	
 	@Required
 	@Column(length=20,nullable=false,name="LC_TOTALGRAVADAS5")	
-	private Long lctotalgravadas5 ;
+	private Double lctotalgravadas5 ;
 	
 	@Required
+	@Stereotype("MONEY")
 	@Column(length=20,nullable=false,name="LC_MONTOIVA5")	
-	private Long lcmontoiva5 ;
+	private Double lcmontoiva5 ;
 	
 	@Required
+	@Stereotype("MONEY")
 	@Column(length=20,nullable=false,name="LC_MONTOTOTAL")	
-	private Long lcmontototal ;
+	private Double lcmontototal ;
 	
 	@Required
 	@Column(length=10,nullable=false,name="LC_CONTRIBUYENTE")	
@@ -55,12 +60,14 @@ public class LibroCompras extends SuperClaseFeliz  {
 	private Long lctipoiva ;
 	
 	@Required
+	@Stereotype("MONEY")
 	@Column(length=20,nullable=false,name="LC_MONTOBASE10")	
-	private Long lcmontobase10 ;
+	private Double lcmontobase10 ;
 	
 	@Required
+	@Stereotype("MONEY")
 	@Column(length=20,nullable=false,name="LC_MONTOBASE5")	
-	private Long lcmontobase5 ;
+	private Double lcmontobase5 ;
 	
 	@Required
 	@Column(length=20,nullable=false,name="LC_NUMEROFACTURA")	
