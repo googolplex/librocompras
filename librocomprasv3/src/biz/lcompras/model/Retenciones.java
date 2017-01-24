@@ -104,7 +104,6 @@ public class Retenciones extends SuperClaseFeliz  {
 	private Date timbradoFchHasta ;
 	
 
-	
 	public Contribuyente getContribuyente() {
 		return contribuyente;
 	}
@@ -113,7 +112,6 @@ public class Retenciones extends SuperClaseFeliz  {
 	public void setContribuyente(Contribuyente contribuyente) {
 		this.contribuyente = contribuyente;
 	}
-
 
 
 	public Cliente getCliente() {
