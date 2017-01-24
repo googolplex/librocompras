@@ -3,6 +3,7 @@ package biz.lcompras.model;
 import java.util.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.*;
 
 import org.openxava.annotations.*;
 import org.openxava.util.*;
@@ -17,21 +18,23 @@ public class Contribuyente extends SuperClaseFeliz  {
 	
 	@Required
 	@Column(length=10,nullable=false,name="CTE_CODIGO")	
-	private Integer ctecodigo ;	
+	private Long ctecodigo ;	
 	
 	@Required
 	@Column(length=40,nullable=false,name="CTE_NOMBRE")	
 	private String ctenombre ;
 
 	@Required
+	@Pattern(regexp="^(SI|NO)$",message="Solo SI / NO ")	
 	@Column(length=20,nullable=false,name="ACTIVO")	
 	private String activo ;
 	
-	public Integer getCtecodigo() {
+
+	public Long getCtecodigo() {
 		return ctecodigo;
 	}
 
-	public void setCtecodigo(Integer ctecodigo) {
+	public void setCtecodigo(Long ctecodigo) {
 		this.ctecodigo = ctecodigo;
 	}
 

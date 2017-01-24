@@ -2,6 +2,7 @@ package biz.lcompras.model;
 import java.util.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.*;
 
 import org.openxava.annotations.*;
 import org.openxava.util.*;
@@ -19,6 +20,7 @@ uniqueConstraints={
 @Tab(properties="codigo,nombre,ciudad",defaultOrder="nombre")
 public class Proveedor extends SuperClaseFeliz {
 	@Required
+	@Pattern(regexp="^[0-9]+-*[0-9]$",message="No es un numero tipo RUC NNNNNNNNN-N ")
 	@Column(length=20,nullable=false,name="PRV_CODIGO")
 	private String codigo ;
 
