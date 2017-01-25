@@ -10,9 +10,11 @@ import org.openxava.util.*;
 
 @Entity
 @Table(name="LIBROVENTAS"
-// ,uniqueConstraints={
-//        @UniqueConstraint(name="LVE_ID_DUPLICADO", columnNames={"ID"})}
+	,uniqueConstraints={
+        @UniqueConstraint(name="LVE_FACTURA_DUPLICADA", columnNames={"LV_PERIODO","IDCONTRIB_ID","LV_NROFACT2"})
+        }
 )
+@Tab(properties="lvPeriodo,lvFecha,contribuyente.cteNombre,cliente.cliNombre,lvNumeroFactura,lvMontoTotal+,lvMontoIva10+,lvMontoIva5+,lvExento+,tipomov.descripcion,estado.descripcion",defaultOrder="${lvPeriodo} desc,${lvFecha} asc")
 public class LibroVentas extends SuperClaseFeliz  {
 	@Required
 	@Min(0)
@@ -59,6 +61,12 @@ public class LibroVentas extends SuperClaseFeliz  {
 	@JoinColumn(name="COBRADORA_ID", referencedColumnName="ID")
 	private PlanCuentas ctaCobradora ;		
 	
+	@DescriptionsList(descriptionProperties="descripcion")
+	@ManyToOne(fetch=FetchType.LAZY,optional=false)	
+	@JoinColumn(name="TUESTADO_ID", referencedColumnName="ID")
+	private Estado estado ;
+	
+	
 	// campo calculado
 
 	// @Required
@@ -77,7 +85,7 @@ public class LibroVentas extends SuperClaseFeliz  {
 	@Required
 	@Min(0)
 	@Column(length=20,nullable=false,name="LV_TOTALGRAVADA10",scale=0)	
-	private Double lvTotalGravada10 ;
+	private Double totalGravada10 ;
 	
 	// campo calculado
 	// @Required
@@ -87,10 +95,10 @@ public class LibroVentas extends SuperClaseFeliz  {
 	@Column(length=20,nullable=false,name="LV_MONTOIVA10",scale=0)	
 	private Double lvMontoIva10 ;
 	
-	@Required
 	@Min(0)
+	@Required
 	@Column(length=20,nullable=false,name="LV_TOTALGRAVADAS5",scale=0)	
-	private Double lvTotalGravadas5 ;
+	private Double totalGravadas5 ;
 	
 	// campo calculado
 	@Required
@@ -109,19 +117,17 @@ public class LibroVentas extends SuperClaseFeliz  {
 	@Column(length=20,nullable=false,name="LV_MONTOTOTAL",scale=0)	
 	private Double lvMontoTotal ;
 	
-	
-	@Required
+	@Hidden
 	@Column(length=4,nullable=false,name="LV_TIPOIVA")	
 	private Long lvTipoIva ;
 	
+	@Min(0)
 	@Required
-	// @Stereotype("MONEY")
 	@Column(length=20,nullable=false,name="LV_MONTOBASE10",scale=0)	
 	private Double lvMontoBase10 ;
 	
-	@Required
-	// @Stereotype("MONEY")
 	@Min(0)
+	@Required
 	@Column(length=20,nullable=false,name="LV_MONTOBASE5",scale=0)	
 	private Double lvMontoBase5 ;
 	
@@ -130,7 +136,6 @@ public class LibroVentas extends SuperClaseFeliz  {
 	@Column(length=20,nullable=false,name="LV_NUMEROFACTURA")	
 	private String lvNumeroFactura ;
 	
-
 	
 	// @Required
 	@Hidden
@@ -154,13 +159,11 @@ public class LibroVentas extends SuperClaseFeliz  {
 	@Column(length=200,nullable=false,name="CONTRACUENTA")	
 	private String contraCuenta ;
 
-	
-	
-	
+
+
 	public Long getLvPeriodo() {
 		return lvPeriodo;
 	}
-
 
 
 
@@ -170,11 +173,9 @@ public class LibroVentas extends SuperClaseFeliz  {
 
 
 
-
 	public Date getLvFecha() {
 		return lvFecha;
 	}
-
 
 
 
@@ -183,18 +184,17 @@ public class LibroVentas extends SuperClaseFeliz  {
 	}
 
 
+
 	public Cliente getCliente() {
 		return cliente;
 	}
+
+
 
 	public void setCliente(Cliente cliente) {
 		this.cliente = cliente;
 	}
 
-
-	public String getLvClienteRuc() {
-		return lvClienteRuc;
-	}
 
 
 	public Contribuyente getContribuyente() {
@@ -202,16 +202,16 @@ public class LibroVentas extends SuperClaseFeliz  {
 	}
 
 
+
 	public void setContribuyente(Contribuyente contribuyente) {
 		this.contribuyente = contribuyente;
 	}
 
 
-	
+
 	public TipoIva getTipoiva() {
 		return tipoiva;
 	}
-
 
 
 
@@ -219,13 +219,18 @@ public class LibroVentas extends SuperClaseFeliz  {
 		this.tipoiva = tipoiva;
 	}
 
+
+
 	public TipoMov getTipomov() {
 		return tipomov;
 	}
 
+
+
 	public void setTipomov(TipoMov tipomov) {
 		this.tipomov = tipomov;
 	}
+
 
 
 	public FormaPago getFormapago() {
@@ -234,16 +239,15 @@ public class LibroVentas extends SuperClaseFeliz  {
 
 
 
-
 	public void setFormapago(FormaPago formapago) {
 		this.formapago = formapago;
 	}
 
 
+
 	public PlanCuentas getCtaVendedora() {
 		return ctaVendedora;
 	}
-
 
 
 
@@ -253,11 +257,9 @@ public class LibroVentas extends SuperClaseFeliz  {
 
 
 
-
 	public PlanCuentas getCtaCobradora() {
 		return ctaCobradora;
 	}
-
 
 
 
@@ -267,6 +269,23 @@ public class LibroVentas extends SuperClaseFeliz  {
 
 
 
+	public Estado getEstado() {
+		return estado;
+	}
+
+
+
+	public void setEstado(Estado estado) {
+		this.estado = estado;
+	}
+
+
+
+	public String getLvClienteRuc() {
+		return lvClienteRuc;
+	}
+
+
 
 	public void setLvClienteRuc(String lvClienteRuc) {
 		this.lvClienteRuc = lvClienteRuc;
@@ -274,11 +293,9 @@ public class LibroVentas extends SuperClaseFeliz  {
 
 
 
-
 	public Double getLvExento() {
 		return lvExento;
 	}
-
 
 
 
@@ -289,24 +306,22 @@ public class LibroVentas extends SuperClaseFeliz  {
 
 
 
-	public Double getLvTotalGravada10() {
-		return lvTotalGravada10;
+
+	public Double getTotalGravada10() {
+		return totalGravada10;
 	}
 
 
 
-
-	public void setLvTotalGravada10(Double lvTotalGravada10) {
-		this.lvTotalGravada10 = lvTotalGravada10;
+	public void setTotalGravada10(Double totalGravada10) {
+		this.totalGravada10 = totalGravada10;
 	}
-
 
 
 
 	public Double getLvMontoIva10() {
 		return lvMontoIva10;
 	}
-
 
 
 
@@ -317,17 +332,15 @@ public class LibroVentas extends SuperClaseFeliz  {
 
 
 
-	public Double getLvTotalGravadas5() {
-		return lvTotalGravadas5;
+	public Double getTotalGravadas5() {
+		return totalGravadas5;
 	}
 
 
 
-
-	public void setLvTotalGravadas5(Double lvTotalGravadas5) {
-		this.lvTotalGravadas5 = lvTotalGravadas5;
+	public void setTotalGravadas5(Double totalGravadas5) {
+		this.totalGravadas5 = totalGravadas5;
 	}
-
 
 
 
@@ -337,17 +350,16 @@ public class LibroVentas extends SuperClaseFeliz  {
 
 
 
-
 	public void setLvMontoIva5(Double lvMontoIva5) {
 		this.lvMontoIva5 = lvMontoIva5;
 	}
 
 
 
-
 	public Double getLvMontoTotal() {
 		return lvMontoTotal;
 	}
+
 
 
 	public void setLvMontoTotal(Double lvMontoTotal) {
@@ -362,11 +374,9 @@ public class LibroVentas extends SuperClaseFeliz  {
 
 
 
-
 	public void setLvTipoIva(Long lvTipoIva) {
 		this.lvTipoIva = lvTipoIva;
 	}
-
 
 
 
@@ -376,11 +386,9 @@ public class LibroVentas extends SuperClaseFeliz  {
 
 
 
-
 	public void setLvMontoBase10(Double lvMontoBase10) {
 		this.lvMontoBase10 = lvMontoBase10;
 	}
-
 
 
 
@@ -390,18 +398,15 @@ public class LibroVentas extends SuperClaseFeliz  {
 
 
 
-
 	public void setLvMontoBase5(Double lvMontoBase5) {
 		this.lvMontoBase5 = lvMontoBase5;
 	}
 
 
 
-
 	public String getLvNumeroFactura() {
 		return lvNumeroFactura;
 	}
-
 
 
 
@@ -416,43 +421,59 @@ public class LibroVentas extends SuperClaseFeliz  {
 	}
 
 
+
 	public void setLvNroFact2(Long lvNroFact2) {
 		this.lvNroFact2 = lvNroFact2;
 	}
+
 
 
 	public String getVentasAlfa() {
 		return ventasAlfa;
 	}
 
+
+
 	public void setVentasAlfa(String ventasAlfa) {
 		this.ventasAlfa = ventasAlfa;
 	}
+
+
 
 	public String getCobrosAlfa() {
 		return cobrosAlfa;
 	}
 
+
+
 	public void setCobrosAlfa(String cobrosAlfa) {
 		this.cobrosAlfa = cobrosAlfa;
 	}
+
+
 
 	public String getCuenta() {
 		return cuenta;
 	}
 
+
+
 	public void setCuenta(String cuenta) {
 		this.cuenta = cuenta;
 	}
+
+
 
 	public String getContraCuenta() {
 		return contraCuenta;
 	}
 
 
+
 	public void setContraCuenta(String contraCuenta) {
 		this.contraCuenta = contraCuenta;
 	}
+
 
 
 	@PreUpdate
