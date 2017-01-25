@@ -4,5 +4,5 @@ cp -r /home/laurasalinas/Downloads/openxava-5.6/workspace/librocomprasv3  libroc
 cp *.sh librocompras/gitfeliz
 cd librocompras
 git add -A
-git commit -a -m "dia dos - laura commit"
+git commit -a -m "dia tres - laura commit"
 git push -u origin master
