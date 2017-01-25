@@ -17,12 +17,12 @@ import org.openxava.util.*;
 @Tab(properties= "lcPeriodo, lcFecha, contribuyente.cteNombre, proveedor.nombre, lcNumeroFactura, lcMontoTotal, lcMontoIva10+, lcMontoIva5+, lcExento+, tipomov.descripcion, estado.descripcion", defaultOrder="${lcPeriodo} desc,${lcFecha} asc")
 public class LibroCompras extends SuperClaseFeliz  {
 	
-	@DescriptionsList(descriptionProperties="cteCodigo,cteNombre")
+	@DescriptionsList(descriptionProperties="cteNombre",order="${cteNombre}")
 	@ManyToOne(fetch=FetchType.LAZY,optional=false)	
 	@JoinColumn(name="IDCONTRIB_ID", referencedColumnName="ID")
 	private Contribuyente contribuyente ;
 	
-	@DescriptionsList(descriptionProperties="codigo,nombre")
+	@DescriptionsList(descriptionProperties="nombre",order="${nombre}")
 	@ManyToOne(fetch=FetchType.LAZY,optional=false)	
 	@JoinColumn(name="IDPROV_ID", referencedColumnName="ID")
 	private Proveedor proveedor ;
@@ -32,17 +32,17 @@ public class LibroCompras extends SuperClaseFeliz  {
 	@JoinColumn(name="IDTIPOIVA_ID", referencedColumnName="ID")
 	private TipoIva tipoiva ;
 	
-	@DescriptionsList(descriptionProperties="cuenta")
+	@DescriptionsList(descriptionProperties="cuenta",condition="((${imputable} = 'S') AND (${codigocuenta} >= 400d) AND (${codigocuenta} <= 499d))")
 	@ManyToOne(fetch=FetchType.LAZY,optional=false)	
 	@JoinColumn(name="COMPRADORA_ID", referencedColumnName="ID")
 	private PlanCuentas ctaCompradora ;
 	
-	@DescriptionsList(descriptionProperties="cuenta")
+	@DescriptionsList(descriptionProperties="cuenta",condition="((${imputable} = 'S') AND (${codigocuenta} >= 1010101d) AND (${codigocuenta} <= 1010199d)) OR ((${imputable} = 'S') AND (${codigocuenta} >= 1010301d) AND (${codigocuenta} <= 1010399d))")
 	@ManyToOne(fetch=FetchType.LAZY,optional=false)	
 	@JoinColumn(name="PAGADORA_ID", referencedColumnName="ID")
 	private PlanCuentas ctaPagadora ;
 	
-	@DescriptionsList(descriptionProperties="descripcion")
+	@DescriptionsList(descriptionProperties="descripcion",condition="${quelibro}=0")
 	@ManyToOne(fetch=FetchType.LAZY,optional=false)	
 	@JoinColumn(name="TUTIPOMOV_ID", referencedColumnName="ID")
 	private TipoMov tipomov ;
@@ -77,29 +77,29 @@ public class LibroCompras extends SuperClaseFeliz  {
 	// @Digits(integer=15,fraction=0)
 	@Min(0) // para los montos no calculados
 	//@Stereotype("MONEY")
-	@Column(length=20,nullable=false,name="LC_MONTOEXENTO")	
+	@Column(length=20,nullable=false,name="LC_MONTOEXENTO",scale=0)	
 	private Double lcExento ;
 	
 	@Required
 	@Min(0)
-	@Column(length=20,nullable=false,name="LC_TOTALGRAVADA10")	
+	@Column(length=20,nullable=false,name="LC_TOTALGRAVADA10",scale=0)	
 	private Double lcTotalGravada10 ;
 	
 	//@Required
 	//@Stereotype("MONEY")
 	@ReadOnly
-	@Column(length=20,nullable=false,name="LC_MONTOIVA10")	
+	@Column(length=20,nullable=false,name="LC_MONTOIVA10",scale=0)	
 	private Double lcMontoIva10 ;
 	
 	@Required
 	@Min(0)
-	@Column(length=20,nullable=false,name="LC_TOTALGRAVADAS5")	
+	@Column(length=20,nullable=false,name="LC_TOTALGRAVADAS5",scale=0)	
 	private Double lcTotalGravadas5 ;
 	
 	@Required
 	//@Stereotype("MONEY")
 	@ReadOnly
-	@Column(length=20,nullable=false,name="LC_MONTOIVA5")	
+	@Column(length=20,nullable=false,name="LC_MONTOIVA5",scale=0)	
 	private Double lcMontoIva5 ;
 	
 	//@Required
@@ -107,7 +107,7 @@ public class LibroCompras extends SuperClaseFeliz  {
 	//@Min(0) // para los montos no calculados
 	//@Stereotype("MONEY")
 	@ReadOnly
-	@Column(length=20,nullable=false,name="LC_MONTOTOTAL")	
+	@Column(length=20,nullable=false,name="LC_MONTOTOTAL",scale=0)	
 	private Double lcMontoTotal ;
 	
 	@Required
@@ -121,12 +121,12 @@ public class LibroCompras extends SuperClaseFeliz  {
 	
 	@Required
 	@Min(0)
-	@Column(length=20,nullable=false,name="LC_MONTOBASE10")	
+	@Column(length=20,nullable=false,name="LC_MONTOBASE10",scale=0)	
 	private Double lcMontoBase10 ;
 	
 	@Required
 	@Min(0)
-	@Column(length=20,nullable=false,name="LC_MONTOBASE5")	
+	@Column(length=20,nullable=false,name="LC_MONTOBASE5",scale=0)	
 	private Double lcMontoBase5 ;
 	
 	@Required
@@ -495,18 +495,23 @@ public class LibroCompras extends SuperClaseFeliz  {
 	}
 
 
-
 	public void setContraCuenta(String contraCuenta) {
 		this.contraCuenta = contraCuenta;
 	}
 
-
-
+	private void camposCalculados() {
+		
+	}
+	@PrePersist
+	private void antesDeGrabar() {
+		this.camposCalculados();
+	}
 	@PreUpdate
 	private void ultimoPaso() {
 			Date mifechora = new java.util.Date() ;
 			super.setModificadoPor(Users.getCurrent()) ;
 			super.setFchUltMod(mifechora)  ;
+			this.camposCalculados();
 	}		
 	
 }

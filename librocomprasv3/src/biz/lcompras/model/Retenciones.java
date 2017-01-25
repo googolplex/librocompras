@@ -6,6 +6,7 @@ import java.util.*;
 import javax.persistence.*;
 import javax.validation.constraints.*;
 
+import org.hibernate.validator.constraints.*;
 import org.openxava.annotations.*;
 import org.openxava.util.*;
 
@@ -20,19 +21,20 @@ import org.openxava.util.*;
 public class Retenciones extends SuperClaseFeliz  {
 
 	// ejemplo de FOREIGN KEY CONTRIBUYENTE
-	@DescriptionsList(descriptionProperties="cteCodigo,cteNombre")
+	@DescriptionsList(descriptionProperties="cteNombre",order="${cteNombre}")
 	@ManyToOne(fetch=FetchType.LAZY,optional=false)	
 	@JoinColumn(name="CONTRIBUYENTE_ID", referencedColumnName="ID")
 	private Contribuyente contribuyente ;
 	
 	// ejemplo de FOREIGN KEY AGENTE (PROVEEDOR)
-	@DescriptionsList(descriptionProperties="cliCodigo,cliNombre")
+	@DescriptionsList(descriptionProperties="cliNombre",order="${cliNombre}")
 	@ManyToOne(fetch=FetchType.LAZY,optional=false)	
 	@JoinColumn(name="AGENTE_ID", referencedColumnName="ID")
 	private Cliente cliente ;	
 	
-	@Required
-	@Pattern(regexp="^[0-9]+-*[0-9]$",message="No es un numero tipo RUC NNNNNNNNN-N ")
+	@ReadOnly
+	// se puede traer directo de la tabla de proveedores
+	// @Pattern(regexp="^[0-9]+-*[0-9]$",message="No es un numero tipo RUC NNNNNNNNN-N ")
 	@Column(length=15,nullable=false,name="RUC")	
 	private String ruc ;
 	
@@ -40,6 +42,11 @@ public class Retenciones extends SuperClaseFeliz  {
 	@Stereotype("DATE")
 	@Column(nullable=false,name="FECHA")	
 	private Date fecha ;
+
+	@Required
+	@Range(min=0)
+	@Column(length=5,nullable=true,name="YYYYMM",scale=0)
+	private Long yyyymm ;	
 	
 	@Required
 	@Pattern(regexp="^[0-9]+-+[0-9]+-+[0-9]+$",message="No es un numero tipo FACTURA NNNN-NNNNN-NNNN ")
@@ -48,7 +55,7 @@ public class Retenciones extends SuperClaseFeliz  {
 	
 	@Required
 	// @Digits(integer=20,fraction=0)
-	@Min(0)  // posiblemente para todos los montos que no son calculados
+	@Range(min=0)  // posiblemente para todos los montos que no son calculados
 	// @Stereotype("MONEY")
 	@Column(length=20,nullable=false,name="MONTOBASE",scale=0)	
 	private Double montoBase ;
@@ -102,7 +109,7 @@ public class Retenciones extends SuperClaseFeliz  {
 	@Stereotype("DATE")
 	@Column(nullable=false,name="TIMBRADOHASTA")	
 	private Date timbradoFchHasta ;
-	
+
 
 	public Contribuyente getContribuyente() {
 		return contribuyente;
@@ -124,13 +131,14 @@ public class Retenciones extends SuperClaseFeliz  {
 	}
 
 
+
 	public String getRuc() {
 		return ruc;
 	}
 
 
 	public void setRuc(String ruc) {
-		this.ruc = ruc.toUpperCase().trim();
+		this.ruc = ruc;
 	}
 
 
@@ -141,6 +149,16 @@ public class Retenciones extends SuperClaseFeliz  {
 
 	public void setFecha(Date fecha) {
 		this.fecha = fecha;
+	}
+
+
+	public Long getYyyymm() {
+		return yyyymm;
+	}
+
+
+	public void setYyyymm(Long yyyymm) {
+		this.yyyymm = yyyymm;
 	}
 
 

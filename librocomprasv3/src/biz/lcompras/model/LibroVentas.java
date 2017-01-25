@@ -26,12 +26,12 @@ public class LibroVentas extends SuperClaseFeliz  {
 	@Column(nullable=false,name="LV_FECHA")	
 	private Date lvFecha ;
 	
-	@DescriptionsList(descriptionProperties="cliCodigo,cliNombre")
+	@DescriptionsList(descriptionProperties="cliNombre",order="${cliNombre}")
 	@ManyToOne(fetch=FetchType.LAZY,optional=false)	
 	@JoinColumn(name="IDCLI_ID", referencedColumnName="ID")
 	private Cliente cliente ;		
 	
-	@DescriptionsList(descriptionProperties="cteCodigo,cteNombre")
+	@DescriptionsList(descriptionProperties="cteNombre",order="${cteNombre}")
 	@ManyToOne(fetch=FetchType.LAZY,optional=false)	
 	@JoinColumn(name="IDCONTRIB_ID", referencedColumnName="ID")
 	private Contribuyente contribuyente ;
@@ -41,7 +41,7 @@ public class LibroVentas extends SuperClaseFeliz  {
 	@JoinColumn(name="IDTIPOIVA_ID", referencedColumnName="ID")
 	private TipoIva tipoiva ;
 
-	@DescriptionsList(descriptionProperties="descripcion")
+	@DescriptionsList(descriptionProperties="descripcion",condition="${quelibro}=1")
 	@ManyToOne(fetch=FetchType.LAZY,optional=false)	
 	@JoinColumn(name="TUTIPOMOV_ID", referencedColumnName="ID")
 	private TipoMov tipomov ;
@@ -51,12 +51,12 @@ public class LibroVentas extends SuperClaseFeliz  {
 	@JoinColumn(name="TUFORMACOBRO_ID", referencedColumnName="ID")
 	private FormaPago formapago ;	
 	
-	@DescriptionsList(descriptionProperties="cuenta")
+	@DescriptionsList(descriptionProperties="cuenta",condition="((${imputable} = 'S') AND (${codigocuenta} >= 1011001d) AND (${codigocuenta} <= 1011099d)) OR ((${imputable} = 'S') AND (${codigocuenta} >= 301d) AND (${codigocuenta} <= 302d)) ")
 	@ManyToOne(fetch=FetchType.LAZY,optional=false)	
 	@JoinColumn(name="VENDEDORA_ID", referencedColumnName="ID")
 	private PlanCuentas ctaVendedora ;	
 	
-	@DescriptionsList(descriptionProperties="cuenta")
+	@DescriptionsList(descriptionProperties="cuenta",condition="(${imputable} = 'S') AND (${codigocuenta} >= 1010101d) AND (${codigocuenta} <= 1010199d)")
 	@ManyToOne(fetch=FetchType.LAZY,optional=false)	
 	@JoinColumn(name="COBRADORA_ID", referencedColumnName="ID")
 	private PlanCuentas ctaCobradora ;		
@@ -76,7 +76,7 @@ public class LibroVentas extends SuperClaseFeliz  {
 	private String lvClienteRuc ;
 	
 	// @Digits(integer=15,fraction=0)
-	@Min(0) // para los montos no calculados
+	@Min(value=0) // para los montos no calculados
 	// @Stereotype("MONEY")
 	@Required	
 	@Column(length=20,nullable=false,name="LV_MONTOEXENTO",scale=0)	
@@ -474,13 +474,21 @@ public class LibroVentas extends SuperClaseFeliz  {
 		this.contraCuenta = contraCuenta;
 	}
 
-
+	private void camposCalculados() {
+		
+	}
+	@PrePersist
+	private void antesDeGrabar() {
+		this.camposCalculados();
+	}
+	
 
 	@PreUpdate
 	private void ultimoPaso() {
 			Date mifechora = new java.util.Date() ;
 			super.setModificadoPor(Users.getCurrent()) ;
 			super.setFchUltMod(mifechora)  ;
+			this.camposCalculados();
 	}		
 	
 }

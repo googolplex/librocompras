@@ -3,6 +3,7 @@ package biz.lcompras.model;
 import java.util.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.*;
 
 import org.openxava.annotations.*;
 import org.openxava.util.*;
@@ -18,12 +19,31 @@ public class TipoMov extends SuperClaseFeliz  {
 	@Column(length=200,nullable=false,name="DESCRIPCION")	
 	private String descripcion ;	
 	
+	/*@Required
+	@Pattern(regexp="^[12]$",message="1-LIBROCOMPRAS 2-LIBROVENTAS")	
+	@Column(length=20,nullable=true,name="QUELIBRO")
+	private String quelibro;*/
+	
+	private QueLibro quelibro;
+	public enum QueLibro {LIBROCOMPRAS, LIBROVENTAS,LIBRORETENCIONES };
+
+	
 	public String getDescripcion() {
 		return descripcion;
 	}
 
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion.toUpperCase().trim();
+	}
+	
+	
+
+	public QueLibro getQuelibro() {
+		return quelibro;
+	}
+
+	public void setQuelibro(QueLibro quelibro) {
+		this.quelibro = quelibro;
 	}
 
 	@PreUpdate
