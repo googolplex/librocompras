@@ -18,17 +18,18 @@ public class TipoIva extends SuperClaseFeliz  {
 	
 	@Required
 	@Column(length=5,nullable=false,name="TIVA_COD")	
-	private Integer tivacod ;	
+	private Long tivacod ;	
 	
 	@Required
 	@Column(length=40,nullable=false,name="TIVA_NOMBRE")	
 	private String tivanombre ;
 	
-	public Integer getTivacod() {
+
+	public Long getTivacod() {
 		return tivacod;
 	}
 
-	public void setTivacod(Integer tivacod) {
+	public void setTivacod(Long tivacod) {
 		this.tivacod = tivacod;
 	}
 

@@ -5,6 +5,7 @@ import java.util.*;
 import javax.persistence.*;
 import javax.validation.constraints.*;
 
+import org.hibernate.validator.constraints.*;
 import org.openxava.annotations.*;
 import org.openxava.util.*;
 
@@ -14,7 +15,7 @@ import org.openxava.util.*;
          @UniqueConstraint(name="LCO_FACTURA_DUPLICADA", columnNames={"LC_PERIODO","IDCONTRIB_ID","LC_NROFACT2"})
         }
 )
-@Tab(properties= "lcPeriodo, lcFecha, contribuyente.cteNombre, proveedor.nombre, lcNumeroFactura, lcMontoTotal, lcMontoIva10+, lcMontoIva5+, lcExento+, tipomov.descripcion, estado.descripcion", defaultOrder="${lcPeriodo} desc,${lcFecha} asc")
+@Tab(properties= "yyyymm, fecha, contribuyente.cteNombre, proveedor.nombre, numeroFactura, montoTotal, montoIva10+, montoIva5+, exento+, tipomov.descripcion, estado.descripcion", defaultOrder="${yyyymm} desc,${fecha} asc")
 public class LibroCompras extends SuperClaseFeliz  {
 	
 	@DescriptionsList(descriptionProperties="cteNombre",order="${cteNombre}")
@@ -65,42 +66,42 @@ public class LibroCompras extends SuperClaseFeliz  {
 	@Required
 	@Stereotype("DATE")
 	@Column(nullable=false,name="LC_FECHA")	
-	private Date lcFecha ;
+	private Date fecha ;
 	
 	//@Required
 	//@Pattern(regexp="^[0-9]+-*[0-9]$",message="No es un numero tipo RUC NNNNNNNNN-N ")
 	@Column(length=20,nullable=false,name="LC_PROVEEDOR_RUC")
 	@ReadOnly
-	private String lcProveedorRuc ;
+	private String proveedorRuc ;
 	
 	@Required
 	// @Digits(integer=15,fraction=0)
-	@Min(0) // para los montos no calculados
+	@Range(min=0)
 	//@Stereotype("MONEY")
 	@Column(length=20,nullable=false,name="LC_MONTOEXENTO",scale=0)	
-	private Double lcExento ;
+	private Double exento ;
 	
 	@Required
-	@Min(0)
+	@Range(min=0)
 	@Column(length=20,nullable=false,name="LC_TOTALGRAVADA10",scale=0)	
-	private Double lcTotalGravada10 ;
+	private Double totalGravada10 ;
 	
 	//@Required
 	//@Stereotype("MONEY")
 	@ReadOnly
 	@Column(length=20,nullable=false,name="LC_MONTOIVA10",scale=0)	
-	private Double lcMontoIva10 ;
+	private Double montoIva10 ;
 	
 	@Required
-	@Min(0)
-	@Column(length=20,nullable=false,name="LC_TOTALGRAVADAS5",scale=0)	
-	private Double lcTotalGravadas5 ;
+	@Range(min=0)
+	@Column(length=20,nullable=false,name="LC_TOTALGRAVADA5",scale=0)	
+	private Double totalGravada5 ;
 	
 	@Required
 	//@Stereotype("MONEY")
 	@ReadOnly
 	@Column(length=20,nullable=false,name="LC_MONTOIVA5",scale=0)	
-	private Double lcMontoIva5 ;
+	private Double montoIva5 ;
 	
 	//@Required
 	// @Digits(integer=15,fraction=0)
@@ -108,8 +109,8 @@ public class LibroCompras extends SuperClaseFeliz  {
 	//@Stereotype("MONEY")
 	@ReadOnly
 	@Column(length=20,nullable=false,name="LC_MONTOTOTAL",scale=0)	
-	private Double lcMontoTotal ;
-	
+	private Double montoTotal ;
+
 	@Required
 	@Column(length=10,nullable=false,name="LC_CONTRIBUYENTE")	
 	private Long lcContribuyente ;
@@ -120,24 +121,24 @@ public class LibroCompras extends SuperClaseFeliz  {
 	private Long lcTipoIva ;
 	
 	@Required
-	@Min(0)
+	@Range(min=0)
 	@Column(length=20,nullable=false,name="LC_MONTOBASE10",scale=0)	
 	private Double lcMontoBase10 ;
 	
 	@Required
-	@Min(0)
+	@Range(min=0)
 	@Column(length=20,nullable=false,name="LC_MONTOBASE5",scale=0)	
-	private Double lcMontoBase5 ;
+	private Double montoBase5 ;
 	
 	@Required
 	@Pattern(regexp="^[0-9]+-+[0-9]+-+[0-9]+$",message="No es un numero tipo FACTURA NNNN-NNNNN-NNNN ")
 	@Column(length=20,nullable=false,name="LC_NUMEROFACTURA")	
-	private String lcNumeroFactura ;
+	private String numeroFactura ;
 	
 	@Required
-	@Min(0)
+	@Range(min=0)
 	@Column(length=6,nullable=false,name="LC_PERIODO")	
-	private Long lcPeriodo ;
+	private Long yyyymm ;
 	
 	//@Required
 	@Hidden
@@ -164,343 +165,208 @@ public class LibroCompras extends SuperClaseFeliz  {
 	@Column(length=200,nullable=false,name="CONTRACUENTA")	
 	private String contraCuenta ;
 	
-	
-	
 	public Contribuyente getContribuyente() {
 		return contribuyente;
 	}
-
-
-
 	public void setContribuyente(Contribuyente contribuyente) {
 		this.contribuyente = contribuyente;
 	}
-
-
-
 	public Proveedor getProveedor() {
 		return proveedor;
 	}
-
-
-
 	public void setProveedor(Proveedor proveedor) {
 		this.proveedor = proveedor;
 	}
-
-
-
 	public TipoIva getTipoiva() {
 		return tipoiva;
 	}
-
-
-
 	public void setTipoiva(TipoIva tipoiva) {
 		this.tipoiva = tipoiva;
 	}
-
-
-
 	public PlanCuentas getCtaCompradora() {
 		return ctaCompradora;
 	}
-
-
-
 	public void setCtaCompradora(PlanCuentas ctaCompradora) {
 		this.ctaCompradora = ctaCompradora;
 	}
-
-
-
 	public PlanCuentas getCtaPagadora() {
 		return ctaPagadora;
 	}
-
-
-
 	public void setCtaPagadora(PlanCuentas ctaPagadora) {
 		this.ctaPagadora = ctaPagadora;
 	}
-
-
-
 	public TipoMov getTipomov() {
 		return tipomov;
 	}
-
-
-
 	public void setTipomov(TipoMov tipomov) {
 		this.tipomov = tipomov;
 	}
-
-
-
 	public FormaPago getFormapago() {
 		return formapago;
 	}
-
-
-
 	public void setFormapago(FormaPago formapago) {
 		this.formapago = formapago;
 	}
-
-
-
 	public Deducible getDeducible() {
 		return deducible;
 	}
-
-
-
 	public void setDeducible(Deducible deducible) {
 		this.deducible = deducible;
 	}
-
-
-
 	public Estado getEstado() {
 		return estado;
 	}
-
-
-
 	public void setEstado(Estado estado) {
 		this.estado = estado;
 	}
-
-
-
-	public Date getLcFecha() {
-		return lcFecha;
+	public Date getFecha() {
+		return fecha;
 	}
-
-
-
-	public void setLcFecha(Date lcFecha) {
-		this.lcFecha = lcFecha;
+	public void setFecha(Date fecha) {
+		this.fecha = fecha;
 	}
-
-
-
-	public String getLcProveedorRuc() {
-		return lcProveedorRuc;
+	public String getProveedorRuc() {
+		return proveedorRuc;
 	}
-
-
-
-	public void setLcProveedorRuc(String lcProveedorRuc) {
-		this.lcProveedorRuc = lcProveedorRuc;
+	public void setProveedorRuc(String proveedorRuc) {
+		this.proveedorRuc = proveedorRuc;
 	}
-
-
-
-	public Double getLcExento() {
-		return lcExento;
+	public Double getExento() {
+		return exento;
 	}
-
-
-
-	public void setLcExento(Double lcExento) {
-		this.lcExento = lcExento;
+	public void setExento(Double exento) {
+		this.exento = exento;
 	}
-
-
-
-	public Double getLcTotalGravada10() {
-		return lcTotalGravada10;
+	public Double getTotalGravada10() {
+		return totalGravada10;
 	}
-
-
-
-	public void setLcTotalGravada10(Double lcTotalGravada10) {
-		this.lcTotalGravada10 = lcTotalGravada10;
+	public void setTotalGravada10(Double totalGravada10) {
+		this.totalGravada10 = totalGravada10;
 	}
-
-
-
-	public Double getLcMontoIva10() {
-		return lcMontoIva10;
+	public Double getMontoIva10() {
+		return montoIva10;
 	}
-
-
-
-	public void setLcMontoIva10(Double lcMontoIva10) {
-		this.lcMontoIva10 = lcMontoIva10;
+	public void setMontoIva10(Double montoIva10) {
+		this.montoIva10 = montoIva10;
 	}
-
-
-
-	public Double getLcTotalGravadas5() {
-		return lcTotalGravadas5;
+	public Double getTotalGravada5() {
+		return totalGravada5;
 	}
-
-
-
-	public void setLcTotalGravadas5(Double lcTotalGravadas5) {
-		this.lcTotalGravadas5 = lcTotalGravadas5;
+	public void setTotalGravada5(Double totalGravada5) {
+		this.totalGravada5 = totalGravada5;
 	}
-
-
-
-	public Double getLcMontoIva5() {
-		return lcMontoIva5;
+	public Double getMontoIva5() {
+		return montoIva5;
 	}
-
-
-
-	public void setLcMontoIva5(Double lcMontoIva5) {
-		this.lcMontoIva5 = lcMontoIva5;
+	public void setMontoIva5(Double montoIva5) {
+		this.montoIva5 = montoIva5;
 	}
-
-
-
-	public Double getLcMontoTotal() {
-		return lcMontoTotal;
+	public Double getMontoTotal() {
+		return montoTotal;
 	}
-
-
-
-	public void setLcMontoTotal(Double lcMontoTotal) {
-		this.lcMontoTotal = lcMontoTotal;
+	public void setMontoTotal(Double montoTotal) {
+		this.montoTotal = montoTotal;
 	}
-
-
-
 	public Long getLcContribuyente() {
 		return lcContribuyente;
 	}
-
-
-
 	public void setLcContribuyente(Long lcContribuyente) {
 		this.lcContribuyente = lcContribuyente;
 	}
-
-
-
+	
 	public Long getLcTipoIva() {
 		return lcTipoIva;
 	}
-
-
-
 	public void setLcTipoIva(Long lcTipoIva) {
 		this.lcTipoIva = lcTipoIva;
 	}
-
-
-
 	public Double getLcMontoBase10() {
 		return lcMontoBase10;
 	}
-
-
-
 	public void setLcMontoBase10(Double lcMontoBase10) {
 		this.lcMontoBase10 = lcMontoBase10;
 	}
-
-
-
-	public Double getLcMontoBase5() {
-		return lcMontoBase5;
+	public Double getMontoBase5() {
+		return montoBase5;
+	}
+	public void setMontoBase5(Double montoBase5) {
+		this.montoBase5 = montoBase5;
+	}
+	public Long getYyyymm() {
+		return yyyymm;
+	}
+	public void setYyyymm(Long yyyymm) {
+		this.yyyymm = yyyymm;
 	}
 
 
-
-	public void setLcMontoBase5(Double lcMontoBase5) {
-		this.lcMontoBase5 = lcMontoBase5;
+	public String getNumeroFactura() {
+		return numeroFactura;
 	}
-
-
-
-	public String getLcNumeroFactura() {
-		return lcNumeroFactura;
+	public void setNumeroFactura(String numeroFactura) {
+		this.numeroFactura = numeroFactura;
 	}
-
-
-
-	public void setLcNumeroFactura(String lcNumeroFactura) {
-		this.lcNumeroFactura = lcNumeroFactura;
-	}
-
-
-
-	public Long getLcPeriodo() {
-		return lcPeriodo;
-	}
-
-
-
-	public void setLcPeriodo(Long lcPeriodo) {
-		this.lcPeriodo = lcPeriodo;
-	}
-
-
-
 	public Long getLcNroFact2() {
 		return lcNroFact2;
 	}
-
-
-
 	public void setLcNroFact2(Long lcNroFact2) {
 		this.lcNroFact2 = lcNroFact2;
 	}
-
-
-
 	public String getComprasAlfa() {
 		return comprasAlfa;
 	}
-
-
-
 	public void setComprasAlfa(String comprasAlfa) {
-		this.comprasAlfa = comprasAlfa;
+		this.comprasAlfa = comprasAlfa.toUpperCase().trim();
 	}
-
-
-
 	public String getPagosAlfa() {
 		return pagosAlfa;
 	}
-
-
-
 	public void setPagosAlfa(String pagosAlfa) {
-		this.pagosAlfa = pagosAlfa;
+		this.pagosAlfa = pagosAlfa.toUpperCase().trim();
 	}
-
-
-
 	public String getCuenta() {
 		return cuenta;
 	}
-
-
-
 	public void setCuenta(String cuenta) {
 		this.cuenta = cuenta;
 	}
-
-
-
 	public String getContraCuenta() {
 		return contraCuenta;
 	}
-
-
 	public void setContraCuenta(String contraCuenta) {
 		this.contraCuenta = contraCuenta;
 	}
-
 	private void camposCalculados() {
+		this.setLcTipoIva(this.tipoiva.getTivacod());
+		this.setProveedorRuc(this.proveedor.getCodigo()); 
+		this.setComprasAlfa(this.ctaCompradora.getCuenta());
+		this.setCuenta(this.ctaCompradora.getCodigoalfa());
+		this.setPagosAlfa(this.ctaPagadora.getCuenta());
+		this.setContraCuenta(this.ctaPagadora.getCuenta());
+		this.setLcContribuyente(this.contribuyente.getCteCodigo());
+		// quito los guiones y puntos e intento convertir a Long
+		try {
+			this.setLcNroFact2(Long.parseLong(this.getNumeroFactura().replaceAll("-", "")));			
+		} catch (Exception e) {
+			this.setLcNroFact2(0L);
+		}
+
 		
+		// calculo de iva
+		
+		if (this.getLcTipoIva().equals(2)) {
+			this.setTotalGravada10(this.getLcMontoBase10());
+			this.setTotalGravada5(this.getMontoBase5());
+			this.setMontoIva10((double) Math.round(this.getLcMontoBase10() * 0.1d));
+			this.setMontoIva5((double) Math.round(this.getMontoBase5() * 0.05d));
+			this.setMontoTotal(this.getExento()+this.getTotalGravada10()+ Math.round(this.getMontoIva10())+this.getTotalGravada5()+Math.round(this.getMontoIva5()));
+		} else {
+			this.setTotalGravada10((double) Math.round(this.getLcMontoBase10() / 1.1d));
+			this.setTotalGravada5((double) Math.round(this.getMontoBase5() / 1.05d));
+			this.setMontoIva10((double) Math.round((this.getLcMontoBase10() / 1.1d ) * 0.1d));
+			this.setMontoIva5((double) Math.round((this.getMontoBase5() / 1.05d) * 0.05d));
+			this.setMontoTotal(this.getExento()+this.getTotalGravada10()+ Math.round(this.getMontoIva10())+this.getTotalGravada5()+Math.round(this.getMontoIva5()));			
+		}		
 	}
 	@PrePersist
 	private void antesDeGrabar() {

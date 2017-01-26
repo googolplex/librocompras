@@ -58,7 +58,7 @@
 		name="jdbc/librocomprasv3" 
 		password="googolplex123abc" 
 		type="javax.sql.DataSource" 
-		url="jdbc:oracle:thin:@192.168.0.78:49161:xe" 
+		url="jdbc:oracle:thin:@201.217.57.4:1521:xe" 
 		username="manzanas" 
 		validationQuery="select sysdate from dual" />
 

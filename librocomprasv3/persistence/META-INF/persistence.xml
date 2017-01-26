@@ -19,8 +19,8 @@
     </persistence-unit>    
         
     
-    <!-- Junit lavaderov3 ORACLE desarrollo -->
-    <persistence-unit name="junit">
+    <!-- Junit lavaderov3 ORACLE hpenvy -->
+    <persistence-unit name="junithp">
     	<provider>org.hibernate.ejb.HibernatePersistence</provider>
     	<!-- <class>org.openxava.web.editors.DiscussionComment</class> -->
         <properties>
@@ -31,6 +31,21 @@
             <property name="hibernate.connection.password" value="googolplex123abc"/>
         </properties>
     </persistence-unit>    
+
+    <!-- Junit lavaderov3 - desde afuera -->
+    <persistence-unit name="junit">
+    	<provider>org.hibernate.ejb.HibernatePersistence</provider>
+    	<!-- <class>org.openxava.web.editors.DiscussionComment</class> -->
+        <properties>
+			<property name="hibernate.connection.driver_class" value="oracle.jdbc.OracleDriver"/>
+			<property name="hibernate.dialect" value="org.hibernate.dialect.Oracle10gDialect"/>
+			<property name="hibernate.connection.url" value="jdbc:oracle:thin:@cafe.lcompras.biz:1521:xe"/>
+			<property name="hibernate.connection.username" value="manzanas"/>
+            <property name="hibernate.connection.password" value="googolplex123abc"/>
+        </properties>
+    </persistence-unit>    
+
+
 
 <!-- ejemplos SQLSERVER Microsoft of SYBASE
 

@@ -5,6 +5,7 @@ import java.util.*;
 import javax.persistence.*;
 import javax.validation.constraints.*;
 
+import org.hibernate.validator.constraints.*;
 import org.openxava.annotations.*;
 import org.openxava.util.*;
 
@@ -75,15 +76,19 @@ public class LibroVentas extends SuperClaseFeliz  {
 	@ReadOnly	
 	private String lvClienteRuc ;
 	
+	@Hidden
+	@Column(length=10,nullable=false,name="LV_CONTRIBUYENTE")
+	private Long lvContribuyente ;
+	
 	// @Digits(integer=15,fraction=0)
-	@Min(value=0) // para los montos no calculados
+	@Range(min=0)
 	// @Stereotype("MONEY")
 	@Required	
 	@Column(length=20,nullable=false,name="LV_MONTOEXENTO",scale=0)	
 	private Double lvExento ;
 	
 	@Required
-	@Min(0)
+	@Range(min=0)
 	@Column(length=20,nullable=false,name="LV_TOTALGRAVADA10",scale=0)	
 	private Double totalGravada10 ;
 	
@@ -95,14 +100,14 @@ public class LibroVentas extends SuperClaseFeliz  {
 	@Column(length=20,nullable=false,name="LV_MONTOIVA10",scale=0)	
 	private Double lvMontoIva10 ;
 	
-	@Min(0)
+	@Range(min=0)
 	@Required
 	@Column(length=20,nullable=false,name="LV_TOTALGRAVADAS5",scale=0)	
 	private Double totalGravadas5 ;
 	
 	// campo calculado
 	@Required
-	// @Min(0)
+	@Range(min=0)
 	// @Stereotype("MONEY")
 	@ReadOnly
 	@Column(length=20,nullable=false,name="LV_MONTOIVA5",scale=0)	
@@ -121,12 +126,12 @@ public class LibroVentas extends SuperClaseFeliz  {
 	@Column(length=4,nullable=false,name="LV_TIPOIVA")	
 	private Long lvTipoIva ;
 	
-	@Min(0)
+	@Range(min=0)
 	@Required
 	@Column(length=20,nullable=false,name="LV_MONTOBASE10",scale=0)	
 	private Double lvMontoBase10 ;
 	
-	@Min(0)
+	@Range(min=0)
 	@Required
 	@Column(length=20,nullable=false,name="LV_MONTOBASE5",scale=0)	
 	private Double lvMontoBase5 ;
@@ -205,6 +210,18 @@ public class LibroVentas extends SuperClaseFeliz  {
 
 	public void setContribuyente(Contribuyente contribuyente) {
 		this.contribuyente = contribuyente;
+	}
+
+
+
+	public Long getLvContribuyente() {
+		return lvContribuyente;
+	}
+
+
+
+	public void setLvContribuyente(Long lvContribuyente) {
+		this.lvContribuyente = lvContribuyente;
 	}
 
 
@@ -475,7 +492,34 @@ public class LibroVentas extends SuperClaseFeliz  {
 	}
 
 	private void camposCalculados() {
+		this.setLvTipoIva(this.tipoiva.getTivacod());
+		this.setLvClienteRuc(this.cliente.getCliCodigo());
+		this.setVentasAlfa(this.ctaVendedora.getCuenta());
+		this.setCuenta(this.ctaVendedora.getCodigoalfa());
+		this.setCobrosAlfa(this.ctaCobradora.getCuenta());
+		this.setContraCuenta(this.ctaCobradora.getCuenta());
+		this.setLvContribuyente(this.contribuyente.getCteCodigo());
+
+		// quito los guiones y puntos e intento convertir a Long
+		try {
+			this.setLvNroFact2(Long.parseLong(this.getLvNumeroFactura().replaceAll("-", "")));			
+		} catch (Exception e) {
+			this.setLvNroFact2(0L);
+		}
 		
+		if (this.getLvTipoIva().equals(2)) {
+			this.setTotalGravada10(this.getLvMontoBase10());
+			this.setTotalGravadas5(this.getLvMontoBase5());
+			this.setLvMontoIva10((double) Math.round(this.getLvMontoBase10() * 0.1d));
+			this.setLvMontoIva5((double) Math.round(this.getLvMontoBase5() * 0.05d));
+			this.setLvMontoTotal(this.getLvExento()+this.getTotalGravada10()+ Math.round(this.getLvMontoIva10())+this.getTotalGravadas5()+Math.round(this.getLvMontoIva5()));
+		} else {
+			this.setTotalGravada10((double) Math.round(this.getLvMontoBase10() / 1.1d));
+			this.setTotalGravadas5((double) Math.round(this.getLvMontoBase5() / 1.05d));
+			this.setLvMontoIva10((double) Math.round((this.getLvMontoBase10() / 1.1d ) * 0.1d));
+			this.setLvMontoIva5((double) Math.round((this.getLvMontoBase5() / 1.05d) * 0.05d));
+			this.setLvMontoTotal(this.getLvExento()+this.getTotalGravada10()+ Math.round(this.getLvMontoIva10())+this.getTotalGravadas5()+Math.round(this.getLvMontoIva5()));			
+		}
 	}
 	@PrePersist
 	private void antesDeGrabar() {

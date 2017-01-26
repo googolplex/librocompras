@@ -17,7 +17,7 @@ import org.openxava.util.*;
         , @UniqueConstraint(name="RET_COMPROBANTE_DUPLICADO", columnNames={"numeroComprobante"})        
  }
 )
-@Tab(properties="fecha,contribuyente.cteCodigo,cliente.cliNombre,factura,numeroComprobante,montoTotal,totalRet",defaultOrder="fecha")
+@Tab(properties="yyyymm,fecha,contribuyente.cteCodigo,cliente.cliNombre,factura,numeroComprobante,montoTotal,totalRet",defaultOrder="fecha")
 public class Retenciones extends SuperClaseFeliz  {
 
 	// ejemplo de FOREIGN KEY CONTRIBUYENTE
@@ -32,9 +32,9 @@ public class Retenciones extends SuperClaseFeliz  {
 	@JoinColumn(name="AGENTE_ID", referencedColumnName="ID")
 	private Cliente cliente ;	
 	
-	@ReadOnly
 	// se puede traer directo de la tabla de proveedores
 	// @Pattern(regexp="^[0-9]+-*[0-9]$",message="No es un numero tipo RUC NNNNNNNNN-N ")
+	@ReadOnly
 	@Column(length=15,nullable=false,name="RUC")	
 	private String ruc ;
 	
@@ -45,13 +45,17 @@ public class Retenciones extends SuperClaseFeliz  {
 
 	@Required
 	@Range(min=0)
-	@Column(length=5,nullable=true,name="YYYYMM",scale=0)
+	@Column(length=6,nullable=true,name="YYYYMM",scale=0)
 	private Long yyyymm ;	
 	
 	@Required
 	@Pattern(regexp="^[0-9]+-+[0-9]+-+[0-9]+$",message="No es un numero tipo FACTURA NNNN-NNNNN-NNNN ")
 	@Column(length=255,nullable=false,name="FACTURA")	
-	private String factura ;
+	private String numeroComprobante ;
+
+	@Required
+	@Column(length=20,nullable=false,name="NUMEROCOMPROBANTE")	
+	private Long factura  ;	
 	
 	@Required
 	// @Digits(integer=20,fraction=0)
@@ -92,9 +96,7 @@ public class Retenciones extends SuperClaseFeliz  {
 	@Column(length=20,nullable=false,name="TOTALRET",scale=0)	
 	private Double totalRet ;
 	
-	@Required
-	@Column(length=20,nullable=false,name="NUMEROCOMPROBANTE")	
-	private Long numeroComprobante ;
+
 	
 	@Required
 	@Stereotype("MEMO")
@@ -130,6 +132,22 @@ public class Retenciones extends SuperClaseFeliz  {
 		this.cliente = cliente;
 	}
 
+	public String getNumeroComprobante() {
+		return numeroComprobante;
+	}
+
+	public void setNumeroComprobante(String numeroComprobante) {
+		this.numeroComprobante = numeroComprobante.toUpperCase().trim();
+	}
+	
+	public Long getFactura() {
+		return factura;
+	}
+
+
+	public void setFactura(Long factura) {
+		this.factura = factura;
+	}
 
 
 	public String getRuc() {
@@ -161,15 +179,6 @@ public class Retenciones extends SuperClaseFeliz  {
 		this.yyyymm = yyyymm;
 	}
 
-
-	public String getFactura() {
-		return factura;
-	}
-
-
-	public void setFactura(String factura) {
-		this.factura = factura;
-	}
 
 
 	public Double getMontoBase() {
@@ -231,17 +240,6 @@ public class Retenciones extends SuperClaseFeliz  {
 		this.totalRet = totalRet;
 	}
 
-
-	public Long getNumeroComprobante() {
-		return numeroComprobante;
-	}
-
-
-	public void setNumeroComprobante(Long numeroComprobante) {
-		this.numeroComprobante = numeroComprobante;
-	}
-
-
 	public String getResponsableRet() {
 		return responsableRet;
 	}
@@ -271,9 +269,19 @@ public class Retenciones extends SuperClaseFeliz  {
 		this.timbradoFchHasta = timbradoFchHasta;
 	}
 
+	private void camposCalculados() {
+		// traigo del RUC del CLIENTE en forma automatica
+		this.setRuc(this.cliente.getCliCodigo());
+	}
+	
+	@PrePersist
+	private void antesDeGrabar() {
+		this.camposCalculados();
+	}
 
 	@PreUpdate
 	private void ultimoPaso() {
+			this.camposCalculados();
 			Date mifechora = new java.util.Date() ;
 			super.setModificadoPor(Users.getCurrent()) ;
 			super.setFchUltMod(mifechora)  ;
