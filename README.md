@@ -11,3 +11,7 @@ esto evita el warning de la tarea ant para actualizar esquemas
 
 Este sistema esta escrito en OPENXAVA 5.6 con eclipse neon
 y el JDK8 
+
+Para que funcione en la intranet de casa debes cambiar el JUNIT2 por el JUNIT
+dentro del persistence del openxava. De otro modo no se conecta, data timeout.
+Simplemente intercambiar los nombres.
