@@ -9,3 +9,5 @@ hecho el 01/2017
 permission javax.management.MBeanTrustPermission "register";
 esto evita el warning de la tarea ant para actualizar esquemas
 
+Este sistema esta escrito en OPENXAVA 5.6 con eclipse neon
+y el JDK8 
