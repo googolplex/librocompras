@@ -3,7 +3,7 @@
 cp -r /home/xoldfusion/Descargas/openxava-5.6_librocompras/workspace/librocomprasv3  librocompras
 cp /home/xoldfusion/Descargas/openxava-5.6_librocompras/tomcat/conf/*.xml librocompras/tomcatfeliz
 cp *.sh librocompras/gitfeliz
-cp -r openshiftfeliz librocompras/openshiftfeliz
+cp -r openshiftfeliz librocompras/
 rm *.*~
 cd librocompras
 git add -A
