@@ -10,6 +10,8 @@ import org.hibernate.validator.constraints.*;
 import org.openxava.annotations.*;
 import org.openxava.util.*;
 
+import biz.lcompras.calculadores.*;
+
 @Entity
 @Table(name="RETENCIONES"
  , uniqueConstraints={
@@ -58,41 +60,35 @@ public class Retenciones extends SuperClaseFeliz  {
 	private Long factura  ;	
 	
 	@Required
-	// @Digits(integer=20,fraction=0)
-	@Range(min=0)  // posiblemente para todos los montos que no son calculados
-	// @Stereotype("MONEY")
+	@Range(min=0)
+	@DefaultValueCalculator(CeroFelizDouble.class)
 	@Column(length=20,nullable=false,name="MONTOBASE",scale=0)	
 	private Double montoBase ;
 	
 	@Required
-	// @Digits(integer=20,fraction=0)
-	//@Stereotype("MONEY")
+	@DefaultValueCalculator(CeroFelizDouble.class)
 	@Column(length=20,nullable=false,name="MONTOIVA",scale=0)	
 	private Double montoIva ;
 	
 	@Required
-	// @Digits(integer=20,fraction=0)
-	// @Stereotype("MONEY")
+	@DefaultValueCalculator(CeroFelizDouble.class)
 	@Column(length=20,nullable=false,name="MONTOTOTAL",scale=0)	
 	private Double montoTotal ;
 	
 	@Required
 	@Min(0)  // posiblemente para todos los montos que no son calculados
 	@Max(100)
-	// @Digits(integer=5,fraction=0)
+	@DefaultValueCalculator(CeroFelizDouble.class)
 	@Column(length=5,nullable=false,name="PORCENTAJERET",scale=2)	
 	private Double porcentajeRet ;
 
 	@Required
-	// @Digits(integer=20,fraction=0)
-	// @Stereotype("MONEY")
+	@DefaultValueCalculator(CeroFelizDouble.class)
 	@Column(length=20,nullable=false,name="MONTORET",scale=0)	
 	private Double montoRet ;
 	
 	@Required
-	// posiblemente sera un campo calculado (no por ahora)
-	// @Digits(integer=15,fraction=0)
-	// @Stereotype("MONEY")
+	@DefaultValueCalculator(CeroFelizDouble.class)
 	@Column(length=20,nullable=false,name="TOTALRET",scale=0)	
 	private Double totalRet ;
 	

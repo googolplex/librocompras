@@ -9,19 +9,38 @@ import org.hibernate.validator.constraints.*;
 import org.openxava.annotations.*;
 import org.openxava.util.*;
 
+import biz.lcompras.calculadores.*;
+
 @Entity
+@EntityValidator (value=biz.lcompras.validadores.VentasFelices.class
+,properties = {
+		@PropertyValue(name="periodo",from="yyyymm")
+		,@PropertyValue(name="fecha",from="fecha")
+}
+)
+
 @Table(name="LIBROCOMPRAS"
       ,uniqueConstraints={
-         @UniqueConstraint(name="LCO_FACTURA_DUPLICADA", columnNames={"LC_PERIODO","IDCONTRIB_ID","LC_NROFACT2"})
+         @UniqueConstraint(name="LCO_FACTURA_DUPLICADA", columnNames={"LC_PROVEEDOR_RUC","LC_NUMEROFACTURA"})
         }
 )
 @Tab(properties= "yyyymm, fecha, contribuyente.cteNombre, proveedor.nombre, numeroFactura, montoTotal, montoIva10+, montoIva5+, exento+, tipomov.descripcion, estado.descripcion", defaultOrder="${yyyymm} desc,${fecha} asc")
 public class LibroCompras extends SuperClaseFeliz  {
+
+	@Required
+	@Range(min=0)
+	@Column(length=6,nullable=false,name="LC_PERIODO")	
+	private Long yyyymm ;
+	
 	
 	@DescriptionsList(descriptionProperties="cteNombre",order="${cteNombre}")
 	@ManyToOne(fetch=FetchType.LAZY,optional=false)	
 	@JoinColumn(name="IDCONTRIB_ID", referencedColumnName="ID")
 	private Contribuyente contribuyente ;
+	
+	@Hidden
+	@Column(length=10,nullable=false,name="LC_CONTRIBUYENTE")	
+	private Long lcContribuyente ;
 	
 	@DescriptionsList(descriptionProperties="nombre",order="${nombre}")
 	@ManyToOne(fetch=FetchType.LAZY,optional=false)	
@@ -68,77 +87,63 @@ public class LibroCompras extends SuperClaseFeliz  {
 	@Column(nullable=false,name="LC_FECHA")	
 	private Date fecha ;
 	
-	//@Required
-	//@Pattern(regexp="^[0-9]+-*[0-9]$",message="No es un numero tipo RUC NNNNNNNNN-N ")
-	@Column(length=20,nullable=false,name="LC_PROVEEDOR_RUC")
 	@ReadOnly
+	@Column(length=20,nullable=false,name="LC_PROVEEDOR_RUC")
 	private String proveedorRuc ;
 	
-	@Required
-	// @Digits(integer=15,fraction=0)
 	@Range(min=0)
-	//@Stereotype("MONEY")
+	@DefaultValueCalculator(CeroFelizDouble.class)
 	@Column(length=20,nullable=false,name="LC_MONTOEXENTO",scale=0)	
-	private Double exento ;
-	
-	@Required
+	private Double exento = 0.0d ;
+
 	@Range(min=0)
+	@DefaultValueCalculator(CeroFelizDouble.class)
+	@Column(length=20,nullable=false,name="LC_MONTOBASE10",scale=0)	
+	private Double lcMontoBase10 = 0.0d;
+	
+	@Range(min=0)
+	@DefaultValueCalculator(CeroFelizDouble.class)
+	@Column(length=20,nullable=false,name="LC_MONTOBASE5",scale=0)	
+	private Double montoBase5 = 0.0d ;
+	
+	
+	@ReadOnly
+	@Range(min=0)
+	@DefaultValueCalculator(CeroFelizDouble.class)
 	@Column(length=20,nullable=false,name="LC_TOTALGRAVADA10",scale=0)	
 	private Double totalGravada10 ;
 	
-	//@Required
-	//@Stereotype("MONEY")
 	@ReadOnly
+	@DefaultValueCalculator(CeroFelizDouble.class)
 	@Column(length=20,nullable=false,name="LC_MONTOIVA10",scale=0)	
 	private Double montoIva10 ;
 	
-	@Required
+	@ReadOnly
 	@Range(min=0)
-	@Column(length=20,nullable=false,name="LC_TOTALGRAVADA5",scale=0)	
+	@DefaultValueCalculator(CeroFelizDouble.class)
+	@Column(length=20,nullable=false,name="LC_TOTALGRAVADAS5",scale=0)	
 	private Double totalGravada5 ;
 	
-	@Required
-	//@Stereotype("MONEY")
 	@ReadOnly
+	@DefaultValueCalculator(CeroFelizDouble.class)
 	@Column(length=20,nullable=false,name="LC_MONTOIVA5",scale=0)	
 	private Double montoIva5 ;
 	
-	//@Required
-	// @Digits(integer=15,fraction=0)
-	//@Min(0) // para los montos no calculados
-	//@Stereotype("MONEY")
 	@ReadOnly
+	@DefaultValueCalculator(CeroFelizDouble.class)
 	@Column(length=20,nullable=false,name="LC_MONTOTOTAL",scale=0)	
 	private Double montoTotal ;
 
-	@Required
-	@Column(length=10,nullable=false,name="LC_CONTRIBUYENTE")	
-	private Long lcContribuyente ;
-	
-	@Required
 	@Hidden
 	@Column(length=4,nullable=false,name="LC_TIPOIVA")	
 	private Long lcTipoIva ;
 	
-	@Required
-	@Range(min=0)
-	@Column(length=20,nullable=false,name="LC_MONTOBASE10",scale=0)	
-	private Double lcMontoBase10 ;
-	
-	@Required
-	@Range(min=0)
-	@Column(length=20,nullable=false,name="LC_MONTOBASE5",scale=0)	
-	private Double montoBase5 ;
 	
 	@Required
 	@Pattern(regexp="^[0-9]+-+[0-9]+-+[0-9]+$",message="No es un numero tipo FACTURA NNNN-NNNNN-NNNN ")
 	@Column(length=20,nullable=false,name="LC_NUMEROFACTURA")	
 	private String numeroFactura ;
 	
-	@Required
-	@Range(min=0)
-	@Column(length=6,nullable=false,name="LC_PERIODO")	
-	private Long yyyymm ;
 	
 	//@Required
 	@Hidden
@@ -164,12 +169,26 @@ public class LibroCompras extends SuperClaseFeliz  {
 	@Hidden
 	@Column(length=200,nullable=false,name="CONTRACUENTA")	
 	private String contraCuenta ;
+
 	
+
+	public Long getYyyymm() {
+		return yyyymm;
+	}
+	public void setYyyymm(Long yyyymm) {
+		this.yyyymm = yyyymm;
+	}
 	public Contribuyente getContribuyente() {
 		return contribuyente;
 	}
 	public void setContribuyente(Contribuyente contribuyente) {
 		this.contribuyente = contribuyente;
+	}
+	public Long getLcContribuyente() {
+		return lcContribuyente;
+	}
+	public void setLcContribuyente(Long lcContribuyente) {
+		this.lcContribuyente = lcContribuyente;
 	}
 	public Proveedor getProveedor() {
 		return proveedor;
@@ -237,6 +256,18 @@ public class LibroCompras extends SuperClaseFeliz  {
 	public void setExento(Double exento) {
 		this.exento = exento;
 	}
+	public Double getLcMontoBase10() {
+		return lcMontoBase10;
+	}
+	public void setLcMontoBase10(Double lcMontoBase10) {
+		this.lcMontoBase10 = lcMontoBase10;
+	}
+	public Double getMontoBase5() {
+		return montoBase5;
+	}
+	public void setMontoBase5(Double montoBase5) {
+		this.montoBase5 = montoBase5;
+	}
 	public Double getTotalGravada10() {
 		return totalGravada10;
 	}
@@ -267,39 +298,12 @@ public class LibroCompras extends SuperClaseFeliz  {
 	public void setMontoTotal(Double montoTotal) {
 		this.montoTotal = montoTotal;
 	}
-	public Long getLcContribuyente() {
-		return lcContribuyente;
-	}
-	public void setLcContribuyente(Long lcContribuyente) {
-		this.lcContribuyente = lcContribuyente;
-	}
-	
 	public Long getLcTipoIva() {
 		return lcTipoIva;
 	}
 	public void setLcTipoIva(Long lcTipoIva) {
 		this.lcTipoIva = lcTipoIva;
 	}
-	public Double getLcMontoBase10() {
-		return lcMontoBase10;
-	}
-	public void setLcMontoBase10(Double lcMontoBase10) {
-		this.lcMontoBase10 = lcMontoBase10;
-	}
-	public Double getMontoBase5() {
-		return montoBase5;
-	}
-	public void setMontoBase5(Double montoBase5) {
-		this.montoBase5 = montoBase5;
-	}
-	public Long getYyyymm() {
-		return yyyymm;
-	}
-	public void setYyyymm(Long yyyymm) {
-		this.yyyymm = yyyymm;
-	}
-
-
 	public String getNumeroFactura() {
 		return numeroFactura;
 	}
@@ -316,13 +320,13 @@ public class LibroCompras extends SuperClaseFeliz  {
 		return comprasAlfa;
 	}
 	public void setComprasAlfa(String comprasAlfa) {
-		this.comprasAlfa = comprasAlfa.toUpperCase().trim();
+		this.comprasAlfa = comprasAlfa;
 	}
 	public String getPagosAlfa() {
 		return pagosAlfa;
 	}
 	public void setPagosAlfa(String pagosAlfa) {
-		this.pagosAlfa = pagosAlfa.toUpperCase().trim();
+		this.pagosAlfa = pagosAlfa;
 	}
 	public String getCuenta() {
 		return cuenta;
@@ -350,7 +354,6 @@ public class LibroCompras extends SuperClaseFeliz  {
 		} catch (Exception e) {
 			this.setLcNroFact2(0L);
 		}
-
 		
 		// calculo de iva
 		
@@ -365,8 +368,8 @@ public class LibroCompras extends SuperClaseFeliz  {
 			this.setTotalGravada5((double) Math.round(this.getMontoBase5() / 1.05d));
 			this.setMontoIva10((double) Math.round((this.getLcMontoBase10() / 1.1d ) * 0.1d));
 			this.setMontoIva5((double) Math.round((this.getMontoBase5() / 1.05d) * 0.05d));
-			this.setMontoTotal(this.getExento()+this.getTotalGravada10()+ Math.round(this.getMontoIva10())+this.getTotalGravada5()+Math.round(this.getMontoIva5()));			
-		}		
+			this.setMontoTotal(this.getExento()+this.getTotalGravada10()+ Math.round(this.getMontoIva10())+this.getTotalGravada5()+Math.round(this.getMontoIva5()));
+		}
 	}
 	@PrePersist
 	private void antesDeGrabar() {
