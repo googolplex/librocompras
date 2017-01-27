@@ -20,7 +20,7 @@
         
     
     <!-- Junit lavaderov3 ORACLE hpenvy -->
-    <persistence-unit name="junit">
+    <persistence-unit name="junitcasa">
     	<provider>org.hibernate.ejb.HibernatePersistence</provider>
     	<!-- <class>org.openxava.web.editors.DiscussionComment</class> -->
         <properties>
@@ -33,7 +33,7 @@
     </persistence-unit>    
 
     <!-- Junit lavaderov3 - desde afuera -->
-    <persistence-unit name="junitTrabajo">
+    <persistence-unit name="junit">
     	<provider>org.hibernate.ejb.HibernatePersistence</provider>
     	<!-- <class>org.openxava.web.editors.DiscussionComment</class> -->
         <properties>

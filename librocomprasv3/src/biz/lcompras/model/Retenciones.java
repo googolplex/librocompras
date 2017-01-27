@@ -13,6 +13,12 @@ import org.openxava.util.*;
 import biz.lcompras.calculadores.*;
 
 @Entity
+@EntityValidator (value=biz.lcompras.validadores.VentasFelices.class
+,properties = {
+		@PropertyValue(name="periodo",from="yyyymm")
+		,@PropertyValue(name="fecha",from="fecha")
+}
+)
 @Table(name="RETENCIONES"
  , uniqueConstraints={
         @UniqueConstraint(name="RET_FACTURA_DUPLICADA", columnNames={"factura"})
