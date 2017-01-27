@@ -25,6 +25,7 @@ import biz.lcompras.calculadores.*;
         }
 )
 @Tab(properties= "yyyymm, fecha, contribuyente.cteNombre, proveedor.nombre, numeroFactura, montoTotal, montoIva10+, montoIva5+, exento+, tipomov.descripcion, estado.descripcion", defaultOrder="${yyyymm} desc,${fecha} asc")
+@View(members="yyyymm,fecha,contribuyente;proveedor,proveedorRuc;"+"contabilidad [tipoiva,ctaCompradora;ctaPagadora]"+"Clasificacion [tipomov,formapago,deducible;estado]"+"Montos [exento,lcMontoBase10,montoBase5]"+"Calculados [totalGravada10,montoIva10;totalGravada5,montoIva5,montoTotal]"+"numeroFactura")
 public class LibroCompras extends SuperClaseFeliz  {
 
 	@Required
@@ -32,15 +33,18 @@ public class LibroCompras extends SuperClaseFeliz  {
 	@Column(length=6,nullable=false,name="LC_PERIODO")	
 	private Long yyyymm ;
 	
+	@Required
+	@Stereotype("DATE")
+	@Column(nullable=false,name="LC_FECHA")	
+	private Date fecha ;
+
+	
 	
 	@DescriptionsList(descriptionProperties="cteNombre",order="${cteNombre}")
 	@ManyToOne(fetch=FetchType.LAZY,optional=false)	
 	@JoinColumn(name="IDCONTRIB_ID", referencedColumnName="ID")
 	private Contribuyente contribuyente ;
 	
-	@Hidden
-	@Column(length=10,nullable=false,name="LC_CONTRIBUYENTE")	
-	private Long lcContribuyente ;
 	
 	@DescriptionsList(descriptionProperties="nombre",order="${nombre}")
 	@ManyToOne(fetch=FetchType.LAZY,optional=false)	
@@ -81,16 +85,7 @@ public class LibroCompras extends SuperClaseFeliz  {
 	@ManyToOne(fetch=FetchType.LAZY,optional=false)	
 	@JoinColumn(name="TUESTADO_ID", referencedColumnName="ID")
 	private Estado estado ;
-	
-	@Required
-	@Stereotype("DATE")
-	@Column(nullable=false,name="LC_FECHA")	
-	private Date fecha ;
-	
-	@ReadOnly
-	@Column(length=20,nullable=false,name="LC_PROVEEDOR_RUC")
-	private String proveedorRuc ;
-	
+		
 	@Range(min=0)
 	@DefaultValueCalculator(CeroFelizDouble.class)
 	@Column(length=20,nullable=false,name="LC_MONTOEXENTO",scale=0)	
@@ -106,6 +101,9 @@ public class LibroCompras extends SuperClaseFeliz  {
 	@Column(length=20,nullable=false,name="LC_MONTOBASE5",scale=0)	
 	private Double montoBase5 = 0.0d ;
 	
+	@ReadOnly
+	@Column(length=20,nullable=false,name="LC_PROVEEDOR_RUC")
+	private String proveedorRuc ;
 	
 	@ReadOnly
 	@Range(min=0)
@@ -134,38 +132,37 @@ public class LibroCompras extends SuperClaseFeliz  {
 	@Column(length=20,nullable=false,name="LC_MONTOTOTAL",scale=0)	
 	private Double montoTotal ;
 
+	@Required
+	@Pattern(regexp="^[0-9]+-+[0-9]+-+[0-9]+$",message="No es un numero tipo FACTURA NNNN-NNNNN-NNNN ")
+	@Column(length=20,nullable=false,name="LC_NUMEROFACTURA")	
+	private String numeroFactura ;
+
+	
 	@Hidden
 	@Column(length=4,nullable=false,name="LC_TIPOIVA")	
 	private Long lcTipoIva ;
 	
 	
-	@Required
-	@Pattern(regexp="^[0-9]+-+[0-9]+-+[0-9]+$",message="No es un numero tipo FACTURA NNNN-NNNNN-NNNN ")
-	@Column(length=20,nullable=false,name="LC_NUMEROFACTURA")	
-	private String numeroFactura ;
+	@Hidden
+	@Column(length=10,nullable=false,name="LC_CONTRIBUYENTE")	
+	private Long lcContribuyente ;
 	
-	
-	//@Required
 	@Hidden
 	@Column(length=20,nullable=false,name="LC_NROFACT2")	
 	private Long lcNroFact2 ;
 	
-	//@Required
 	@Hidden
 	@Column(length=200,nullable=false,name="COMPRASALFA")	
 	private String comprasAlfa ;
 	
-	//@Required
 	@Hidden
 	@Column(length=200,nullable=false,name="PAGOSALFA")	
 	private String pagosAlfa ;
 	
-	//@Required
 	@Hidden
 	@Column(length=200,nullable=false,name="CUENTA")	
 	private String cuenta ;
 	
-	//@Required
 	@Hidden
 	@Column(length=200,nullable=false,name="CONTRACUENTA")	
 	private String contraCuenta ;

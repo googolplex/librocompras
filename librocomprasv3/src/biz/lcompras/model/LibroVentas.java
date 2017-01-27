@@ -25,6 +25,7 @@ import biz.lcompras.calculadores.*;
         }
 )
 @Tab(properties="lvPeriodo,lvFecha,contribuyente.cteNombre,cliente.cliNombre,lvNumeroFactura,lvMontoTotal+,lvMontoIva10+,lvMontoIva5+,lvExento+,tipomov.descripcion,estado.descripcion",defaultOrder="${lvPeriodo} desc,${lvFecha} asc")
+@View(members="lvPeriodo,lvFecha,lvNumeroFactura;cliente,lvClienteRuc;contribuyente;"+"Contabilidad [tipoiva,tipomov;formapago,estado;ctaVendedora,ctaCobradora];"+";lvExento,lvMontoBase10,lvMontoBase5;"+"Totales [totalGravada10,lvMontoIva10;totalGravadas5,lvMontoIva5,lvMontoTotal]")
 public class LibroVentas extends SuperClaseFeliz  {
 	@Required
 	@Min(0)
