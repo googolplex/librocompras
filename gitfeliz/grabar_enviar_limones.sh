@@ -7,5 +7,5 @@ cp -r openshiftfeliz librocompras/
 rm *.*~
 cd librocompras
 git add -A
-git commit -a -m "dia cuatro - campos calculados"
+git commit -a -m "subo al openshift"
 git push -u origin master
