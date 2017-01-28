@@ -18,7 +18,7 @@ public class VentasFelices implements IValidator {
 	private Calendar micalendario  = Calendar.getInstance() ;
 	@Override
 	public void validate(Messages errors) throws Exception {
-		this.setMensaje("No coincide YYYYMM con la fecha");
+		this.setMensaje("No coincide YYYYMM con la fecha ");
 		this.micalendario.setTime(fecha);
 		int anho = micalendario.get(Calendar.YEAR) ;
 		int mes = micalendario.get(Calendar.MONTH) + 1 ;
@@ -28,7 +28,7 @@ public class VentasFelices implements IValidator {
 		String periodofeliz = periodo.toString();
 		
 		if ( !anomes.equals(periodo) ) {
-			errors.add(this.getMensaje()+anomesfeliz + " <--> " + periodofeliz);
+			errors.add(this.getMensaje()+ anomesfeliz + " <--> " + periodofeliz);
 		}
 		
 	}

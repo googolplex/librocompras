@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="librocompras2" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
 	<property name="ireport.zoom" value="1.5"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.y" value="90"/>
 	<property name="ireport.jasperserver.reportUnit" value="/reports/casaderoger/librocompras_1"/>
 	<property name="ireport.jasperserver.url" value="http://pecerafeliz.lcompras.biz/jasperserver/services/repository"/>
 	<property name="ireport.scriptlethandling" value="0"/>
@@ -345,6 +345,58 @@ and k.tuestado_id = m.id(+)
 and k.tudeducible_id = x.id(+)
 and k.tutipomov_id = 8104
 and k.tudeducible_id = 1681
+
+union all
+select 1 as q22
+, k.id
+, k.CRE_contribuyente || '-' || t.cte_nombre as contribuyente
+, cast(k.CRE_fecha as date) as LC_fecha
+, k.CRE_proveedor_ruc || '-' || q.prv_nombre as proveedor
+, k.CRE_montoexento as exento
+, k.CRE_totalgravada10 as grav10
+, k.CRE_montoiva10 as iva10
+, k.CRE_totalgravadas5 as grav5
+, k.CRE_montoiva5 as iva5
+, k.CRE_montototal as total
+, to_char(CRE_fecha,'YYYY/MM') as CRE_periodo
+, k.CRE_numerofactura
+, k.CRE_tipoiva as tiva
+, '95-COMPRAS RETRASADAS' ||' ESTADO '|| m.descripcion || ' DEDUCIBLE ' || x.descripcion as tipomov
+from COMPRASRETRASADAS k , proveedor q, contribuyente t, estado m, deducible x
+where to_char(CRE_fecha,'YYYY') = substr($P{p_yyyymm},1,4)
+and k.CRE_contribuyente =  $P{p_contribuyente}
+and k.CRE_contribuyente= t.cte_codigo(+)
+and k.CRE_proveedor_ruc = q.prv_codigo(+)
+and k.CRE_tuestado_id = m.id(+)
+and k.CRE_tudeducible_id = x.id(+)
+and k.CRE_tutipomov_id = 22211
+and k.CRE_tudeducible_id = 1681
+union all
+select 1 as q22
+, k.id
+, k.CRE_contribuyente || '-' || t.cte_nombre as contribuyente
+, cast(k.CRE_fecha as date ) as LC_fecha
+, k.CRE_proveedor_ruc || '-' || q.prv_nombre as proveedor
+, k.CRE_montoexento as exento
+, k.CRE_totalgravada10 as grav10
+, k.CRE_montoiva10 as iva10
+, k.CRE_totalgravadas5 as grav5
+, k.CRE_montoiva5 as iva5
+, k.CRE_montototal as total
+, to_char(CRE_fecha,'YYYY/MM') as CRE_periodo
+, k.CRE_numerofactura
+, k.CRE_tipoiva as tiva
+, '96-COMPRAS RETRASADAS' ||' ESTADO '|| m.descripcion || ' NO DEDUCIBLE ' || x.descripcion as tipomov
+from COMPRASRETRASADAS k , proveedor q, contribuyente t, estado m, deducible x
+where to_char(CRE_fecha,'YYYY') = substr($P{p_yyyymm},1,4)
+and k.CRE_contribuyente =  $P{p_contribuyente}
+and k.CRE_contribuyente= t.cte_codigo(+)
+and k.CRE_proveedor_ruc = q.prv_codigo(+)
+and k.CRE_tuestado_id = m.id(+)
+and k.CRE_tudeducible_id = x.id(+)
+and k.CRE_tutipomov_id = 22211
+and k.CRE_tudeducible_id = 1682
+
 
 ) order by tipomov, lc_fecha]]>
 	</queryString>

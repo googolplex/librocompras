@@ -23,7 +23,7 @@ public class TipoMov extends SuperClaseFeliz  {
 	private String quelibro;*/
 	
 	private QueLibro quelibro;
-	public enum QueLibro {LIBROCOMPRAS, LIBROVENTAS,LIBRORETENCIONES };
+	public enum QueLibro {LIBROCOMPRAS, LIBROVENTAS,LIBRORETENCIONES,COMPRASRETRASADAS };
 
 	
 	public String getDescripcion() {
