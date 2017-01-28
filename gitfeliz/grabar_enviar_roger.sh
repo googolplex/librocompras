@@ -7,5 +7,5 @@ cp -r jasperfeliz librocompras/
 rm *.*~
 cd librocompras
 git add -A
-git commit -a -m "dia tres - todolisto ya se puede probar"
+git commit -a -m "dia seis - incluyo compras retrasadas"
 git push -u origin master
