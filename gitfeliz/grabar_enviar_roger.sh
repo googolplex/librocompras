@@ -4,6 +4,7 @@ cp /home/xoldfusion/Downloads/openxava-5.6/tomcat/conf/*.xml librocompras/tomcat
 cp *.sh librocompras/gitfeliz
 cp -r openshiftfeliz librocompras/
 cp -r jasperfeliz librocompras/
+cp  amazon2017llave/*.sh librocompras/
 rm *.*~
 cd librocompras
 git add -A

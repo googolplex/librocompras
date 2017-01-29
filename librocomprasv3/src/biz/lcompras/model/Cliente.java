@@ -22,7 +22,7 @@ public class Cliente extends SuperClaseFeliz {
 	@Column(length=20,nullable=false,name="CLI_CODIGO")		
 	private String cliCodigo;
 	@Required
-	@Column(length=20,nullable=false,name="CLI_NOMBRE")		
+	@Column(length=80,nullable=false,name="CLI_NOMBRE")		
 	private String cliNombre;
 
 	

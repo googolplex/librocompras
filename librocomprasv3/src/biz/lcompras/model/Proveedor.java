@@ -17,7 +17,7 @@ uniqueConstraints={
         @UniqueConstraint(name="PRV_NOMBRE_DUPLICADO", columnNames={"PRV_NOMBRE"})
         ,@UniqueConstraint(name="PRV_CODIGO_DUPLICADO", columnNames={"PRV_CODIGO"})        
 })
-@Tab(properties="codigo,nombre,ciudad",defaultOrder="nombre")
+@Tab(properties="codigo,nombre,ciudad",defaultOrder="${nombre} asc")
 public class Proveedor extends SuperClaseFeliz {
 	@Required
 	@Pattern(regexp="^[0-9]+-*[0-9]$",message="No es un numero tipo RUC NNNNNNNNN-N ")
