@@ -11,10 +11,11 @@ import org.openxava.util.*;
 
 @MappedSuperclass
 public class SuperClaseFeliz {
-	@SequenceGenerator(name="HIBERNATE_SEQUENCE",sequenceName="HIBERNATE_SEQUENCE",allocationSize=1)
 	@Hidden
 	@Id
+	@SequenceGenerator(name="HIBERNATE_SEQUENCE",sequenceName="HIBERNATE_SEQUENCE",allocationSize=1)	
 	@GeneratedValue(strategy=GenerationType.SEQUENCE,generator="HIBERNATE_SEQUENCE")
+	
 	@Digits(integer=19, fraction = 0)
 	@Column(name="ID")
 	private Long id ;
@@ -41,6 +42,7 @@ public class SuperClaseFeliz {
 	@DefaultValueCalculator(CurrentUserCalculator.class)	
 	@Column(length=50,name="MODIFICADOPOR")	
 	private String	modificadoPor = Users.getCurrent() ; // porque es un campo oculto
+
 
 	public Long getId() {
 		return id;

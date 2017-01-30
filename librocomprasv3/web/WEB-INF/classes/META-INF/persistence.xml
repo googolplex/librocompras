@@ -40,12 +40,10 @@
              value="jdbc:postgresql://52.200.184.169:5432/manzanas"/>
              <property name="hibernate.connection.username" value="manzanas"/>
              <property name="hibernate.connection.password" value="googolplex123abc"/>
+              <property name="hibernate.jdbc.use_get_generated_keys" value="true" />
 			 <property name="hibernate.temp.use_jdbc_metadata_defaults" value="false" />             
          </properties>
      </persistence-unit>
-	<!--
-				 <property name="hibernate.jdbc.use_get_generated_keys" value="true" /> 
-	-->
    
     <!-- Junit lavaderov3 ORACLE hpenvy -->
     <persistence-unit name="junitHP">

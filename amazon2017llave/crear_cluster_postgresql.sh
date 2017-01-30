@@ -1,2 +1,2 @@
 #!/bin/bash
-pg_createcluster 9.3 main --start
+pg_createcluster 9.5 main --start
