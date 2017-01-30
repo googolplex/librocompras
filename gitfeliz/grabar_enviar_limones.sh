@@ -1,11 +1,13 @@
 #!/bin/bash
 # hecho para mi pc de escritorio
-cp -r /home/xoldfusion/Descargas/openxava-5.6_librocompras/workspace/librocomprasv3  librocompras
-cp /home/xoldfusion/Descargas/openxava-5.6_librocompras/tomcat/conf/*.xml librocompras/tomcatfeliz
+cp -r /home/xoldfusion/Downloads/openxava-5.6/workspace/librocomprasv3  librocompras
+cp /home/xoldfusion/Downloads/openxava-5.6/tomcat/conf/*.xml librocompras/tomcatfeliz
 cp *.sh librocompras/gitfeliz
 cp -r openshiftfeliz librocompras/
+cp -r jasperfeliz librocompras/
+cp  amazon2017llave/*.sh librocompras/amazon2017llave
 rm *.*~
 cd librocompras
 git add -A
-git commit -a -m "subo al openshift"
+git commit -a -m "dia seis - incluyo compras retrasadas"
 git push -u origin master
