@@ -25,7 +25,7 @@ import biz.lcompras.calculadores.*;
         , @UniqueConstraint(name="RET_COMPROBANTE_DUPLICADO", columnNames={"numeroComprobante"})        
  }
 )
-@Tab(properties="yyyymm,fecha,contribuyente.cteCodigo,cliente.cliNombre,factura,numeroComprobante,montoTotal,totalRet",defaultOrder="${fecha}")
+@Tab(properties="yyyymm,fecha,contribuyente.cteCodigo,cliente.cliNombre,factura,numeroComprobante,montoTotal,totalRet",defaultOrder="${fecha} desc")
 public class Retenciones extends SuperClaseFeliz  {
 
 	// ejemplo de FOREIGN KEY CONTRIBUYENTE
