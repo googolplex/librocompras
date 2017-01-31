@@ -8,7 +8,7 @@ cp *.sh librocompras/gitfeliz
 cp -r openshiftfeliz librocompras/
 cp -r jasperfeliz librocompras/
 cp  amazon2017llave/*.sh librocompras/amazon2017llave
-rm -R *.*~
+rm *.*~
 cd librocompras
 git add -A
 git commit -a -m "version postgresql con jdbc4"
