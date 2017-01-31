@@ -15,3 +15,16 @@ y el JDK8
 Para que funcione en la intranet de casa debes cambiar el JUNIT2 por el JUNIT
 dentro del persistence del openxava. De otro modo no se conecta, data timeout.
 Simplemente intercambiar los nombres.
+
+la carpeta openshiftfeliz contiene lo necesario para conectarse
+al postgres del openshift 
+
+20170131a. JDBC4 con POSTGRESQL
+----------------------
+
+para que te funcione esa tecnologia debes comentar
+<!-- <property name="hibernate.connection.driver_class" value="org.postgresql.Driver"/> -->
+en el archivo persistence.xml
+y poner el JAR de postgres dentro del WEB-INF/lib del proyecto postgresql-9.4.1212.jre7
+no sirve si pones el JAR dentro del tomcat lib
+ni tampoco en el classpath del eclipse neon

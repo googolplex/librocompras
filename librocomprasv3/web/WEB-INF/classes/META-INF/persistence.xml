@@ -34,7 +34,7 @@
     <persistence-unit name="junit">
          <provider>org.hibernate.ejb.HibernatePersistence</provider>
          <properties>
-             <property name="hibernate.connection.driver_class" value="org.postgresql.Driver"/>
+		<!-- <property name="hibernate.connection.driver_class" value="org.postgresql.Driver"/> -->			   			              
              <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect"/>
              <property name="hibernate.connection.url" 
              value="jdbc:postgresql://52.200.184.169:5432/manzanas"/>

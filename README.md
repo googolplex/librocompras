@@ -18,3 +18,15 @@ Simplemente intercambiar los nombres.
 
 la carpeta openshiftfeliz contiene lo necesario para conectarse
 al postgres del openshift 
+
+20170131a. JDBC4 con POSTGRESQL
+----------------------
+
+para que te funcione esa tecnologia debes comentar
+<!-- <property name="hibernate.connection.driver_class" value="org.postgresql.Driver"/> -->
+en el archivo persistence.xml
+y poner el JAR de postgres dentro del WEB-INF/lib del proyecto postgresql-9.4.1212.jre7
+no sirve si pones el JAR dentro del tomcat lib
+ni tampoco en el classpath del eclipse neon
+
+el server.xml queda con el driverClassName="org.postgresql.Driver"  sin cambios
