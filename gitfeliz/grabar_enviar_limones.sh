@@ -8,6 +8,7 @@ cp *.sh librocompras/gitfeliz
 cp -r openshiftfeliz librocompras/
 cp -r jasperfeliz librocompras/
 cp  amazon2017llave/*.sh librocompras/amazon2017llave
+cp  amazon2017llave/*.war librocompras/amazon2017llave
 rm *.*~
 cd librocompras
 git add -A
