@@ -21,5 +21,14 @@
     	</action>
 	</controller>    
     -->
-    
+    <controller name="LibroCompras">
+    	<extends controller="Typical"/>
+    	<action name="imprimeLibro" 
+    	    description="Para imprimir el libro de ventas y compras"
+    	    mode="list"
+    	    icon="printer" 
+    	    keystroke="Control P"
+        	class="biz.lcompras.acciones.LibroComprasImpresionAction">
+    	</action>
+	</controller>    
 </controllers>
