@@ -12,5 +12,5 @@ cp  amazon2017llave/*.sh librocompras/amazon2017llave
 rm *.*~
 cd librocompras
 git add -A
-git commit -a -m "impresion con el boton para jasperreport - aun no anda la accion"
+git commit -a -m "vista y entity class para la impresion - falta depurar la vista ultimo periodo"
 git push -u origin master
