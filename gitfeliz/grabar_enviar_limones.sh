@@ -12,5 +12,5 @@ cp  amazon2017llave/*.sh librocompras/amazon2017llave
 rm *.*~
 cd librocompras
 git add -A
-git commit -a -m "vista y entity class para la impresion - agregar el EJB"
+git commit -a -m "solo lectura para librocompras controllers"
 git push -u origin master

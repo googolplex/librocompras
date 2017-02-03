@@ -30,3 +30,8 @@ no sirve si pones el JAR dentro del tomcat lib
 ni tampoco en el classpath del eclipse neon
 
 el server.xml queda con el driverClassName="org.postgresql.Driver"  sin cambios
+
+
+conexion lenta al postgres 
+
+http://stackoverflow.com/questions/29670916/hibernate-with-jpa-connection-time-very-slow

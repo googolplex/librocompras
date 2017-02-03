@@ -1,7 +1,6 @@
-<!DOCTYPE hibernate-configuration PUBLIC 	"-//Hibernate/Hibernate Configuration DTD//EN"	"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
-	
+<!DOCTYPE hibernate-configuration PUBLIC 	"-//Hibernate/Hibernate Configuration DTD//EN"	"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">	
 <!-- 
-This hibernate configuration is used only for IMAGES_GALLERY stereotype,
+  http://stackoverflow.com/questions/29670916/hibernate-with-jpa-connection-time-very-slowThis hibernate configuration is used only for IMAGES_GALLERY stereotype,
 because this stereotype is implemented using hibernate native APIs.
 If you do not use IMAGE_GALLERY you do not need this file.
 

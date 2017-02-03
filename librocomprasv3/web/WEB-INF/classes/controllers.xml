@@ -22,7 +22,6 @@
 	</controller>    
     -->
     <controller name="VistaLibroCompras">
-    	<extends controller="Typical"/>
     	<action name="imprimeLibro" 
     	    description="Para imprimir el libro de ventas y compras"
     	    mode="list"
