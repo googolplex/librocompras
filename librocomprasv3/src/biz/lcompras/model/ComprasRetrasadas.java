@@ -7,6 +7,7 @@ import javax.validation.constraints.*;
 
 import org.hibernate.validator.constraints.*;
 import org.openxava.annotations.*;
+import org.openxava.calculators.*;
 import org.openxava.util.*;
 
 import biz.lcompras.calculadores.*;
@@ -36,6 +37,7 @@ public class ComprasRetrasadas extends SuperClaseFeliz  {
 	@Required
 	@Stereotype("DATE")
 	@Column(nullable=false,name="CRE_FECHA")	
+	@DefaultValueCalculator(CurrentDateCalculator.class)	
 	private Date fecha ;
 
 	

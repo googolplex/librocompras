@@ -7,6 +7,7 @@ import javax.validation.constraints.*;
 
 import org.hibernate.validator.constraints.*;
 import org.openxava.annotations.*;
+import org.openxava.calculators.*;
 import org.openxava.util.*;
 
 import biz.lcompras.calculadores.*;
@@ -35,6 +36,7 @@ public class LibroVentas extends SuperClaseFeliz  {
 	@Required
 	@Stereotype("DATE")
 	@Column(nullable=false,name="LV_FECHA")	
+	@DefaultValueCalculator(CurrentDateCalculator.class)
 	private Date lvFecha ;
 	
 	@DescriptionsList(descriptionProperties="cliNombre",order="${cliNombre}")

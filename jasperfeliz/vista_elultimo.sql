@@ -1,12 +1,10 @@
-create or replace view vista_elultimo as
-select w.per_yyyy || '/' || trim(to_char(w.per_mm,'99')) as YYYYMM
-from periodos w
-where w.lastupdated in (
-select max(lastupdated) as ultimo 
-from periodos k )
-union all
-select w.per_yyyy ||'/99' as YYYYMM
-from periodos w
-where w.lastupdated in (
-select max(lastupdated) as ultimo 
-from periodos k )
+CREATE OR REPLACE VIEW public.vista_elultimo AS
+ SELECT (w.per_yyyy || '/'::text) || lpad(btrim(to_char(w.per_mm, '99'::text)), 2, '0'::text) AS yyyymm
+   FROM periodos w
+  WHERE (w.lastupdated IN ( SELECT max(k.lastupdated) AS ultimo
+           FROM periodos k))
+UNION ALL
+ SELECT w.per_yyyy || '/99'::text AS yyyymm
+   FROM periodos w
+  WHERE (w.lastupdated IN ( SELECT max(k.lastupdated) AS ultimo
+           FROM periodos k));

@@ -8,6 +8,7 @@ import javax.validation.constraints.*;
 
 import org.hibernate.validator.constraints.*;
 import org.openxava.annotations.*;
+import org.openxava.calculators.*;
 import org.openxava.util.*;
 
 import biz.lcompras.calculadores.*;
@@ -49,6 +50,7 @@ public class Retenciones extends SuperClaseFeliz  {
 	@Required
 	@Stereotype("DATE")
 	@Column(nullable=false,name="FECHA")	
+	@DefaultValueCalculator(CurrentDateCalculator.class)	
 	private Date fecha ;
 
 	@Required
