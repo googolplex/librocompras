@@ -22,7 +22,7 @@
 	</controller>    
     -->
     <controller name="VistaLibroCompras">
-    	<action name="imprimeLibro" 
+    	<action name="imprimeLibro"    	
     	    description="Para imprimir el libro de ventas y compras"
     	    mode="list"
     	    icon="printer" 
