@@ -26,7 +26,7 @@
     	<!-- para que no me creee la tabla discussion comments 2017
     			<class>org.openxava.web.editors.DiscussionComment</class> -->
         <properties>
-            <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect"/>            
+            <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect"/>                       
         </properties>
     </persistence-unit>    
         
@@ -40,7 +40,7 @@
              value="jdbc:postgresql://52.200.184.169:5432/manzanas"/>
              <property name="hibernate.connection.username" value="manzanas"/>
              <property name="hibernate.connection.password" value="googolplex123abc"/>
-              <property name="hibernate.jdbc.use_get_generated_keys" value="true" />
+             <property name="hibernate.jdbc.use_get_generated_keys" value="true" />
 			 <property name="hibernate.temp.use_jdbc_metadata_defaults" value="false" />             
          </properties>
      </persistence-unit>

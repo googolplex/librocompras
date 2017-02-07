@@ -40,7 +40,7 @@
     <Resource auth="Container" description="User database that can be updated and saved" factory="org.apache.catalina.users.MemoryUserDatabaseFactory" name="UserDatabase" pathname="conf/tomcat-users.xml" type="org.apache.catalina.UserDatabase"/>
 
 
-
+	<!-- postgre + tomcat + connection properties para AMAZON -->
     <Resource auth="Container" 
 	    	description="Conexion al postgre en amazon ec2"
 	    	dialect="org.hibernate.dialect.PostgreSQLDialect"
@@ -56,6 +56,7 @@
 	    	url="jdbc:postgresql://52.200.184.169:5432/manzanas" 
 	    	username="manzanas"
 	    	password="googolplex123abc"
+	    	connectionProperties="hibernate.temp.use_jdbc_metadata_defaults=false;hibernate.jdbc.use_get_generated_keys=true"
 	    	validationQuery="select now()"/>
 
 
