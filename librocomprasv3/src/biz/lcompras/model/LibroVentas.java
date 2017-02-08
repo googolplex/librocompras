@@ -336,8 +336,8 @@ public class LibroVentas extends SuperClaseFeliz  {
 		} catch (Exception e) {
 			this.setLvNroFact2(0L);
 		}
-		
-		if (this.getLvTipoIva().equals(2)) {
+		Long ivadiscriminado = 2L ;
+		if (this.getLvTipoIva() == ivadiscriminado) {
 			this.setTotalGravada10(this.getLvMontoBase10());
 			this.setTotalGravadas5(this.getLvMontoBase5());
 			this.setLvMontoIva10((double) Math.round(this.getLvMontoBase10() * 0.1d));

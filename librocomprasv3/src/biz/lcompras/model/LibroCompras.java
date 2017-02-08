@@ -340,6 +340,7 @@ public class LibroCompras extends SuperClaseFeliz  {
 		this.contraCuenta = contraCuenta;
 	}
 	private void camposCalculados() {
+		System.out.println("DENTRO DE CAMPOS CALCULADOS");
 		this.setLcTipoIva(this.tipoiva.getTivacod());
 		this.setProveedorRuc(this.proveedor.getCodigo()); 
 		this.setComprasAlfa(this.ctaCompradora.getCuenta());
@@ -355,8 +356,8 @@ public class LibroCompras extends SuperClaseFeliz  {
 		}
 		
 		// calculo de iva
-		
-		if (this.getLcTipoIva().equals(2)) {
+		Long ivadiscriminado = 2L ;
+		if (this.getLcTipoIva() == ivadiscriminado) {		
 			this.setTotalGravada10(this.getLcMontoBase10());
 			this.setTotalGravada5(this.getMontoBase5());
 			this.setMontoIva10((double) Math.round(this.getLcMontoBase10() * 0.1d));

@@ -12,5 +12,5 @@ cp  amazon2017llave/*.sh librocompras/amazon2017llave
 rm *.*~
 cd librocompras
 git add -A
-git commit -a -m "solo lectura para librocompras controllers"
+git commit -a -m "bug en el calculo del iva"
 git push -u origin master
