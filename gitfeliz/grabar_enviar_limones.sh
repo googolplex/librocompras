@@ -12,5 +12,5 @@ cp  amazon2017llave/*.sh librocompras/amazon2017llave
 rm *.*~
 cd librocompras
 git add -A
-git commit -a -m "bug en el calculo del iva"
+git commit -a -m "ya puedo enviar ireport desde el classpath"
 git push -u origin master

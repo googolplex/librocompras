@@ -21,8 +21,8 @@ public class LibroComprasImpresionAction  extends JasperReportBaseAction {
 
 	@Override
 	protected String getJRXML() throws Exception {
-		// return "Prueba3.jrxml"; // lo leo del classpath 
-		return "/home/xoldfusion/Descargas/librocompras2017/jasperfeliz/prueba3.jrxml" ; // lo leo del file system
+		return "biz/lcompras/informes/prueba3.jrxml"; // lo leo del classpath 
+		// return "/home/xoldfusion/Descargas/librocompras2017/jasperfeliz/prueba3.jrxml" ; // lo leo del file system
 	}
 
 	@Override
