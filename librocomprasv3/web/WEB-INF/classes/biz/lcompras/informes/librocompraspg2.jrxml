@@ -548,7 +548,7 @@ order by tipomov, lc_fecha]]>
 	<pageHeader>
 		<band height="102" splitType="Stretch">
 			<staticText>
-				<reportElement key="staticText" style="Title" x="234" y="4" width="260" height="38"/>
+				<reportElement key="staticText" style="Title" x="101" y="4" width="393" height="38"/>
 				<textElement verticalAlignment="Middle">
 					<font size="20" pdfFontName="Times-Bold"/>
 				</textElement>
