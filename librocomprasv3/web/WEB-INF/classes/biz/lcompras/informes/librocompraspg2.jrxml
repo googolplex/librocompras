@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="librocompraspg" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" whenNoDataType="AllSectionsNoDetail" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="librocompraspg2" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" whenNoDataType="AllSectionsNoDetail" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
 	<property name="ireport.zoom" value="1.5"/>
-	<property name="ireport.x" value="45"/>
+	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<property name="ireport.jasperserver.reportUnit" value="/reports/casaderoger/librocompras_1"/>
 	<property name="ireport.jasperserver.url" value="http://pecerafeliz.lcompras.biz/jasperserver/services/repository"/>
@@ -438,23 +438,23 @@ order by tipomov, lc_fecha]]>
 	<field name="lc_numerofactura" class="java.lang.String"/>
 	<field name="tiva" class="java.lang.Long"/>
 	<field name="tipomov" class="java.lang.String"/>
-	<variable name="texen" class="java.math.BigDecimal" resetType="Group" resetGroup="tipomov" calculation="Sum">
+	<variable name="texen" class="java.lang.Double" resetType="Group" resetGroup="tipomov" calculation="Sum">
 		<variableExpression><![CDATA[$F{exento}]]></variableExpression>
 		<initialValueExpression><![CDATA[0]]></initialValueExpression>
 	</variable>
-	<variable name="tgrav10" class="java.math.BigDecimal" resetType="Group" resetGroup="tipomov" calculation="Sum">
+	<variable name="tgrav10" class="java.lang.Double" resetType="Group" resetGroup="tipomov" calculation="Sum">
 		<variableExpression><![CDATA[$F{grav10}]]></variableExpression>
 	</variable>
-	<variable name="tiva10" class="java.math.BigDecimal" resetType="Group" resetGroup="tipomov" calculation="Sum">
+	<variable name="tiva10" class="java.lang.Double" resetType="Group" resetGroup="tipomov" calculation="Sum">
 		<variableExpression><![CDATA[$F{iva10}]]></variableExpression>
 	</variable>
-	<variable name="tgrav5" class="java.math.BigDecimal" resetType="Group" resetGroup="tipomov" calculation="Sum">
+	<variable name="tgrav5" class="java.lang.Double" resetType="Group" resetGroup="tipomov" calculation="Sum">
 		<variableExpression><![CDATA[$F{grav5}]]></variableExpression>
 	</variable>
-	<variable name="tiva5" class="java.math.BigDecimal" resetType="Group" resetGroup="tipomov" calculation="Sum">
+	<variable name="tiva5" class="java.lang.Double" resetType="Group" resetGroup="tipomov" calculation="Sum">
 		<variableExpression><![CDATA[$F{iva5}]]></variableExpression>
 	</variable>
-	<variable name="ttotal" class="java.math.BigDecimal" resetType="Group" resetGroup="tipomov" calculation="Sum">
+	<variable name="ttotal" class="java.lang.Double" resetType="Group" resetGroup="tipomov" calculation="Sum">
 		<variableExpression><![CDATA[$F{total}]]></variableExpression>
 	</variable>
 	<variable name="contadorfeliz" class="java.lang.Integer" resetType="Group" resetGroup="tipomov" calculation="Count">
@@ -499,42 +499,42 @@ order by tipomov, lc_fecha]]>
 					<textElement textAlignment="Right">
 						<font size="8"/>
 					</textElement>
-					<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{ttotal}]]></textFieldExpression>
+					<textFieldExpression class="java.lang.Double"><![CDATA[$V{ttotal}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="true" pattern="#,##0" isBlankWhenNull="false">
 					<reportElement key="textField" style="Detail" x="543" y="10" width="54" height="15"/>
 					<textElement textAlignment="Right">
 						<font size="8"/>
 					</textElement>
-					<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{tiva10}]]></textFieldExpression>
+					<textFieldExpression class="java.lang.Double"><![CDATA[$V{tiva10}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="true" pattern="#,##0" isBlankWhenNull="false">
 					<reportElement key="textField" style="Detail" x="410" y="10" width="54" height="15"/>
 					<textElement textAlignment="Right">
 						<font size="8"/>
 					</textElement>
-					<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{texen}]]></textFieldExpression>
+					<textFieldExpression class="java.lang.Double"><![CDATA[$V{texen}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="true" pattern="#,##0" isBlankWhenNull="false">
 					<reportElement key="textField" style="Detail" x="661" y="10" width="57" height="15"/>
 					<textElement textAlignment="Right">
 						<font size="8"/>
 					</textElement>
-					<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{tiva5}]]></textFieldExpression>
+					<textFieldExpression class="java.lang.Double"><![CDATA[$V{tiva5}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="true" pattern="#,##0" isBlankWhenNull="false">
 					<reportElement key="textField" style="Detail" x="599" y="10" width="56" height="15"/>
 					<textElement textAlignment="Right">
 						<font size="8"/>
 					</textElement>
-					<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{tgrav5}]]></textFieldExpression>
+					<textFieldExpression class="java.lang.Double"><![CDATA[$V{tgrav5}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="true" pattern="#,##0" isBlankWhenNull="false">
 					<reportElement key="textField" style="Detail" x="466" y="10" width="72" height="15"/>
 					<textElement textAlignment="Right">
 						<font size="8"/>
 					</textElement>
-					<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{tgrav10}]]></textFieldExpression>
+					<textFieldExpression class="java.lang.Double"><![CDATA[$V{tgrav10}]]></textFieldExpression>
 				</textField>
 			</band>
 		</groupFooter>
@@ -548,9 +548,9 @@ order by tipomov, lc_fecha]]>
 	<pageHeader>
 		<band height="102" splitType="Stretch">
 			<staticText>
-				<reportElement key="staticText" style="Title" x="234" y="4" width="365" height="38"/>
+				<reportElement key="staticText" style="Title" x="234" y="4" width="260" height="38"/>
 				<textElement verticalAlignment="Middle">
-					<font size="30" pdfFontName="Times-Bold"/>
+					<font size="20" pdfFontName="Times-Bold"/>
 				</textElement>
 				<text><![CDATA[Libro de ventas y compras]]></text>
 			</staticText>
@@ -669,49 +669,49 @@ order by tipomov, lc_fecha]]>
 					<textElement textAlignment="Right">
 						<font size="8"/>
 					</textElement>
-					<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{exento}]]></textFieldExpression>
+					<textFieldExpression class="java.lang.Double"><![CDATA[$F{exento}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="true" isBlankWhenNull="false">
 					<reportElement key="textField-2" style="Detail" x="1" y="0" width="25" height="15"/>
 					<textElement textAlignment="Center">
 						<font size="8"/>
 					</textElement>
-					<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{contadorfeliz}]]></textFieldExpression>
+					<textFieldExpression class="java.lang.Double"><![CDATA[$V{contadorfeliz}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="true" pattern="#,##0" isBlankWhenNull="false">
 					<reportElement key="textField" style="Detail" x="466" y="0" width="72" height="15"/>
 					<textElement textAlignment="Right">
 						<font size="8"/>
 					</textElement>
-					<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{grav10}]]></textFieldExpression>
+					<textFieldExpression class="java.lang.Double"><![CDATA[$F{grav10}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="true" pattern="#,##0" isBlankWhenNull="false">
 					<reportElement key="textField" style="Detail" x="543" y="0" width="54" height="15"/>
 					<textElement textAlignment="Right">
 						<font size="8"/>
 					</textElement>
-					<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{iva10}]]></textFieldExpression>
+					<textFieldExpression class="java.lang.Double"><![CDATA[$F{iva10}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="true" pattern="#,##0" isBlankWhenNull="false">
 					<reportElement key="textField" style="Detail" x="599" y="0" width="56" height="15"/>
 					<textElement textAlignment="Right">
 						<font size="8"/>
 					</textElement>
-					<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{grav5}]]></textFieldExpression>
+					<textFieldExpression class="java.lang.Double"><![CDATA[$F{grav5}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="true" pattern="#,##0" isBlankWhenNull="false">
 					<reportElement key="textField" style="Detail" x="661" y="0" width="57" height="15"/>
 					<textElement textAlignment="Right">
 						<font size="8"/>
 					</textElement>
-					<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{iva5}]]></textFieldExpression>
+					<textFieldExpression class="java.lang.Double"><![CDATA[$F{iva5}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="true" pattern="#,##0" isBlankWhenNull="false">
 					<reportElement key="textField" style="Detail" x="722" y="0" width="72" height="15"/>
 					<textElement textAlignment="Right">
 						<font size="8"/>
 					</textElement>
-					<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{total}]]></textFieldExpression>
+					<textFieldExpression class="java.lang.Double"><![CDATA[$F{total}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="true" pattern="#,##0" isBlankWhenNull="false">
 					<reportElement key="textField" style="Detail" x="313" y="0" width="93" height="15"/>
@@ -725,7 +725,7 @@ order by tipomov, lc_fecha]]>
 					<textElement textAlignment="Center">
 						<font size="8"/>
 					</textElement>
-					<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{id}]]></textFieldExpression>
+					<textFieldExpression class="java.lang.Double"><![CDATA[$F{id}]]></textFieldExpression>
 				</textField>
 			</frame>
 		</band>
@@ -780,6 +780,13 @@ order by tipomov, lc_fecha]]>
 				<reportElement key="staticText" style="Column header" x="170" y="17" width="143" height="15" forecolor="#736343"/>
 				<textElement textAlignment="Center"/>
 				<text><![CDATA[FIN DE INFORME]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText" style="Column header" x="4" y="17" width="110" height="15" forecolor="#736343"/>
+				<textElement textAlignment="Center">
+					<font size="8" isBold="false"/>
+				</textElement>
+				<text><![CDATA[librocompraspg2.jrxml]]></text>
 			</staticText>
 		</band>
 	</summary>

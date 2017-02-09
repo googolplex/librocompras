@@ -2,34 +2,44 @@ package biz.lcompras.acciones;
 
 
 import java.util.*;
-
-import javax.servlet.*;
-
-import org.apache.commons.fileupload.*;
 import org.openxava.actions.*;
-
 import net.sf.jasperreports.engine.*;
 
 public class LibroComprasImpresionAction  extends JasperReportBaseAction {
 
+	
 	@Override
 	protected JRDataSource getDataSource() throws Exception {
-		// TODO Auto-generated method stub
-		return new JREmptyDataSource();
-		// return null;
+		// return new JREmptyDataSource();
+		// si le devuelves null se le devuelve la conexion JDBC, para usar el SQL dentro del reporte
+		// http://www.openxava.org/OpenXavaDoc/apidocs/org/openxava/actions/JasperReportBaseAction.html#getDataSource()
+		return null;
 	}
 
 	@Override
 	protected String getJRXML() throws Exception {
-		return "biz/lcompras/informes/prueba3.jrxml"; // lo leo del classpath 
 		// return "/home/xoldfusion/Descargas/librocompras2017/jasperfeliz/prueba3.jrxml" ; // lo leo del file system
+		// return "biz/lcompras/informes/prueba3.jrxml"; // lo leo del classpath 
+		return "biz/lcompras/informes/librocompraspg2.jrxml"; // lo leo del classpath
 	}
 
 	@Override
-	protected Map getParameters() throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+	protected Map<String,String> getParameters() throws Exception {
+		Map<String,String> parametros = new HashMap<String,String>() ;
+		parametros.put("p_yyyymm","201701");
+		parametros.put("p_contribuyente","581069");
+		return parametros ;
 	}
+
+	
+	
+/*	public Collection<VistaLibroCompras> getRenglones() {
+		if (renglones == null ) {
+			renglones = XPersistence.getManager().createQuery("from VistaLibroCompras").getResultList();
+		}
+		return renglones;
+	}*/
+
 
 	
 	
