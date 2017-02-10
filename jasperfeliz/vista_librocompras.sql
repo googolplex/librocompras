@@ -1,8 +1,10 @@
-CREATE OR REPLACE VIEW public.vista_librocompras AS
+-- drop view vista_librocompras ;
+CREATE VIEW public.vista_librocompras AS
  SELECT *   FROM ( SELECT 1 AS q22,
             k.id,
             0 AS version,
             (k.lv_contribuyente || '-'::text) || t.cte_nombre::text AS contribuyente,
+            k.lv_contribuyente as cta_codigo,
             to_char(k.lv_fecha,'YYYY/MM/DD') as lc_fecha,
             (k.lv_cliente_ruc::text || '-'::text) || q.cli_nombre::text AS proveedor,
             k.lv_montoexento AS exento,
@@ -29,6 +31,7 @@ CREATE OR REPLACE VIEW public.vista_librocompras AS
             k.id,
             0 AS version,
             (k.lv_contribuyente || '-'::text) || t.cte_nombre::text AS contribuyente,
+            k.lv_contribuyente  as cta_codigo ,                  
             to_char(k.lv_fecha,'YYYY/MM/DD') as lc_fecha,
             (k.lv_cliente_ruc::text || '-'::text) || q.cli_nombre::text AS proveedor,
             k.lv_montoexento AS exento,
@@ -55,6 +58,7 @@ CREATE OR REPLACE VIEW public.vista_librocompras AS
             k.id,
             0 AS version,
             '.'::text AS contribuyente,
+            k.lv_contribuyente  as cta_codigo ,                  
             to_char(k.lv_fecha,'YYYY/MM/DD') as lc_fecha,
             '.'::text AS proveedor,
             0 AS exento,
@@ -81,6 +85,7 @@ CREATE OR REPLACE VIEW public.vista_librocompras AS
             k.id,
             0 AS version,
             '.'::text AS contribuyente,
+            k.lv_contribuyente  as cta_codigo ,                  
             to_char(k.lv_fecha,'YYYY/MM/DD') as lc_fecha,
             '.'::text AS proveedor,
             0 AS exento,
@@ -107,6 +112,7 @@ CREATE OR REPLACE VIEW public.vista_librocompras AS
             k.id,
             0 AS version,
             '.'::text AS contribuyente,
+            k.lv_contribuyente  as cta_codigo ,                  
             to_char(k.lv_fecha,'YYYY/MM/DD') as lc_fecha,
             '.'::text AS proveedor,
             0 AS exento,
@@ -133,6 +139,7 @@ CREATE OR REPLACE VIEW public.vista_librocompras AS
             k.id,
             0 AS version,
             (k.lc_contribuyente || '-'::text) || t.cte_nombre::text AS contribuyente,
+            k.lc_contribuyente  as cta_codigo,                  
             to_char(k.lc_fecha,'YYYY/MM/DD') as lc_fecha,
             (k.lc_proveedor_ruc::text || '-'::text) || q.prv_nombre::text AS proveedor,
             k.lc_montoexento AS exento,
@@ -160,6 +167,7 @@ CREATE OR REPLACE VIEW public.vista_librocompras AS
             k.id,
             0 AS version,
             (k.lc_contribuyente || '-'::text) || t.cte_nombre::text AS contribuyente,
+            k.lc_contribuyente  as cta_codigo ,                                    
             to_char(k.lc_fecha,'YYYY/MM/DD') as lc_fecha,
             (k.lc_proveedor_ruc::text || '-'::text) || q.prv_nombre::text AS proveedor,
             k.lc_montoexento AS exento,
@@ -187,6 +195,7 @@ CREATE OR REPLACE VIEW public.vista_librocompras AS
             k.id,
             0 AS version,
             (k.lc_contribuyente || '-'::text) || t.cte_nombre::text AS contribuyente,
+            k.lc_contribuyente  as cta_codigo,                                    
             to_char(k.lc_fecha,'YYYY/MM/DD') as lc_fecha,
             (k.lc_proveedor_ruc::text || '-'::text) || q.prv_nombre::text AS proveedor,
             k.lc_montoexento AS exento,
@@ -214,6 +223,7 @@ CREATE OR REPLACE VIEW public.vista_librocompras AS
             k.id,
             0 AS version,
             (k.lc_contribuyente || '-'::text) || t.cte_nombre::text AS contribuyente,
+            k.lc_contribuyente as cta_codigo,                                    
             to_char(k.lc_fecha,'YYYY/MM/DD') as lc_fecha,
             (k.lc_proveedor_ruc::text || '-'::text) || q.prv_nombre::text AS proveedor,
             k.lc_montoexento AS exento,
@@ -241,6 +251,7 @@ CREATE OR REPLACE VIEW public.vista_librocompras AS
             k.id,
             0 AS version,
             (r.cte_codigo || '-'::text) || r.cte_nombre::text AS contribuyente,
+            r.cte_codigo as cta_codigo,                                    
             to_char(k.fecha,'YYYY/MM/DD') as lc_fecha,
             (w_1.cli_codigo::text || '-'::text) || w_1.cli_nombre::text AS proveedor,
             0 AS exento,
@@ -265,6 +276,7 @@ CREATE OR REPLACE VIEW public.vista_librocompras AS
             k.id,
             0 AS version,
             (k.lc_contribuyente || '-'::text) || t.cte_nombre::text AS contribuyente,
+            k.lc_contribuyente  as cta_codigo,
             to_char(k.lc_fecha,'YYYY/MM/DD') as lc_fecha,
             (k.lc_proveedor_ruc::text || '-'::text) || q.prv_nombre::text AS proveedor,
             k.lc_montoexento AS exento,
@@ -292,6 +304,7 @@ CREATE OR REPLACE VIEW public.vista_librocompras AS
             k.id,
             0 AS version,
             (k.lc_contribuyente || '-'::text) || t.cte_nombre::text AS contribuyente,
+             k.lc_contribuyente  as cta_codigo,
             to_char(k.lc_fecha,'YYYY/MM/DD') as lc_fecha,
             (k.lc_proveedor_ruc::text || '-'::text) || q.prv_nombre::text AS proveedor,
             k.lc_montoexento AS exento,
@@ -319,6 +332,7 @@ CREATE OR REPLACE VIEW public.vista_librocompras AS
             k.id,
             0 AS version,
             (k.lc_contribuyente || '-'::text) || t.cte_nombre::text AS contribuyente,
+             k.lc_contribuyente  as cta_codigo,
             to_char(k.lc_fecha,'YYYY/MM/DD') as lc_fecha,
             (k.lc_proveedor_ruc::text || '-'::text) || q.prv_nombre::text AS proveedor,
             k.lc_montoexento AS exento,
@@ -346,6 +360,7 @@ CREATE OR REPLACE VIEW public.vista_librocompras AS
             k.id,
             0 AS version,
             (k.cre_contribuyente || '-'::text) || t.cte_nombre::text AS contribuyente,
+             k.cre_contribuyente  as cta_codigo,                  
             to_char(k.cre_fecha::date,'YYYY/MM/DD') AS lc_fecha,
             (k.cre_proveedor_ruc::text || '-'::text) || q.prv_nombre::text AS proveedor,
             k.cre_montoexento AS exento,
@@ -373,6 +388,7 @@ CREATE OR REPLACE VIEW public.vista_librocompras AS
             k.id,
             0 AS version,
             (k.cre_contribuyente || '-'::text) || t.cte_nombre::text AS contribuyente,
+       k.cre_contribuyente as cta_codigo,                  
             to_char(k.cre_fecha::date,'YYYY/MM/DD') AS lc_fecha,
             (k.cre_proveedor_ruc::text || '-'::text) || q.prv_nombre::text AS proveedor,
             k.cre_montoexento AS exento,
@@ -395,9 +411,4 @@ CREATE OR REPLACE VIEW public.vista_librocompras AS
              LEFT JOIN estado m ON k.cre_tuestado_id = m.id
              LEFT JOIN deducible x ON k.cre_tudeducible_id = x.id
           WHERE k.cre_tutipomov_id = 22211 AND k.cre_tudeducible_id = 1682) narices
-     JOIN vista_elultimo w ON narices.lc_periodo = w.yyyymm;
-
-ALTER TABLE public.vista_librocompras
-    OWNER TO manzanas;
-
-
+     JOIN vista_elultimo w ON ( narices.lc_periodo = w.yyyymm AND narices.cta_codigo = w.cte_codigo );

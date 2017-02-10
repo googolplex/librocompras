@@ -21,7 +21,8 @@
     	</action>
 	</controller>    
     -->
-    <controller name="VistaLibroCompras">
+    <controller name="Periodos">
+    	<extends controller="Typical"/>
     	<action name="imprimeLibro"    	
     	    description="Para imprimir el libro de ventas y compras"
     	    mode="list"
@@ -30,4 +31,5 @@
         	class="biz.lcompras.acciones.LibroComprasImpresionAction">
     	</action>
 	</controller>    
+		
 </controllers>

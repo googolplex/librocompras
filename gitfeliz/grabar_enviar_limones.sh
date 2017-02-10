@@ -12,5 +12,5 @@ cp  amazon2017llave/*.sh librocompras/amazon2017llave
 rm *.*~
 cd librocompras
 git add -A
-git commit -a -m "me falta ajustar los fonts"
+git commit -a -m "ya funciona el reporte con JDBC me falto la parte de parametros"
 git push -u origin master
