@@ -53,7 +53,7 @@
 	    	minIdle="5" 
 	    	name="jdbc/librocomprasv3"  
 	    	type="javax.sql.DataSource" 
-	    	url="jdbc:postgresql://52.200.184.169:5432/manzanas" 
+	    	url="jdbc:postgresql://52.55.47.82:5432/manzanas" 
 	    	username="manzanas"
 	    	password="googolplex123abc"
 	    	connectionProperties="hibernate.temp.use_jdbc_metadata_defaults=false;hibernate.jdbc.use_get_generated_keys=true"
