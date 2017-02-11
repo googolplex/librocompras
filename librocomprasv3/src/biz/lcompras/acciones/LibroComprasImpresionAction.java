@@ -29,7 +29,8 @@ public class LibroComprasImpresionAction  extends JasperReportBaseAction {
 		// yo creo que no se va a usar porque tengo la clase donde pongo los parametros
 		parametros.put("p_yyyymm","201701");
 		parametros.put("p_contribuyente","581069");
-		return parametros ;
+		// return parametros ;
+		return null ;
 	}
 
 	

@@ -35,3 +35,14 @@ el server.xml queda con el driverClassName="org.postgresql.Driver"  sin cambios
 conexion lenta al postgres 
 
 http://stackoverflow.com/questions/29670916/hibernate-with-jpa-connection-time-very-slow
+
+para evitar el error de file IO user preferences
+crear una carpeta el /usr/share/tomcat/.openxava
+
+https://sourceforge.net/p/openxava/discussion/437013/thread/d2401ff3/
+
+error: Impossible to translate id 
+poner https://sourceforge.net/p/qamanager/discussion/780347/thread/6430ce41/
+i18nWarnings=false
+
+

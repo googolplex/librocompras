@@ -53,7 +53,7 @@
 	    	minIdle="5" 
 	    	name="jdbc/librocomprasv3"  
 	    	type="javax.sql.DataSource" 
-	    	url="jdbc:postgresql://52.55.47.82:5432/manzanas" 
+	    	url="jdbc:postgresql://52.207.31.88:5432/manzanas" 
 	    	username="manzanas"
 	    	password="googolplex123abc"
 	    	connectionProperties="hibernate.temp.use_jdbc_metadata_defaults=false;hibernate.jdbc.use_get_generated_keys=true"
@@ -197,8 +197,10 @@
              Documentation at: /docs/config/valve.html
              Note: The pattern used is equivalent to using pattern="common" -->
         <Valve className="org.apache.catalina.valves.AccessLogValve" directory="logs" pattern="%h %l %u %t &quot;%r&quot; %s %b" prefix="localhost_access_log." suffix=".txt"/>
-
-      <Context docBase="librocomprasv3" path="/librocomprasv3" reloadable="true" source="org.eclipse.jst.jee.server:librocomprasv3"/></Host>
+	
+      <Context docBase="librocomprasv3" path="/librocomprasv3" reloadable="true" source="org.eclipse.jst.jee.server:librocomprasv3"/>
+      
+      </Host>
     </Engine>
   </Service>
 </Server>

@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<persistence xmlns="http://java.sun.com/xml/ns/persistence"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd"
+             version="1.0">
+             
+    <!-- JNDI lavaderov3 Tomcat + Oracle -->
+    <persistence-unit name="defaultOracle">
+    	<provider>org.hibernate.ejb.HibernatePersistence</provider>
+    	<non-jta-data-source>java://comp/env/jdbc/librocomprasv3</non-jta-data-source>
+    	<class>org.openxava.session.GalleryImage</class>
+    	<!-- para que no me creee la tabla discussion comments 2017
+    			<class>org.openxava.web.editors.DiscussionComment</class> -->
+        <properties>
+            <property name="hibernate.dialect" value="org.hibernate.dialect.Oracle10gDialect"/>            
+        </properties>
+    </persistence-unit>    
+
+    <!-- JNDI lavaderov3 Tomcat + Postgres -->
+    <persistence-unit name="default">
+    	<provider>org.hibernate.ejb.HibernatePersistence</provider>
+    	<non-jta-data-source>java://comp/env/jdbc/librocomprasv3</non-jta-data-source>
+    	<class>org.openxava.session.GalleryImage</class>
+    	<!-- para que no me creee la tabla discussion comments 2017
+    			<class>org.openxava.web.editors.DiscussionComment</class> -->
+        <properties>
+            <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect"/>                       
+        </properties>
+    </persistence-unit>    
+        
+	<!-- ejemplo para postgres en Amazon EC2 -->
+    <persistence-unit name="junit">
+         <provider>org.hibernate.ejb.HibernatePersistence</provider>
+         <properties>
+		<!-- <property name="hibernate.connection.driver_class" value="org.postgresql.Driver"/> -->			   			              
+             <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect"/>
+             <property name="hibernate.connection.url" 
+             value="jdbc:postgresql://52.54.171.134:5432/manzanas"/>
+             <property name="hibernate.connection.username" value="manzanas"/>
+             <property name="hibernate.connection.password" value="googolplex123abc"/>
+             <property name="hibernate.jdbc.use_get_generated_keys" value="true" />
+			 <property name="hibernate.temp.use_jdbc_metadata_defaults" value="false" />             
+         </properties>
+     </persistence-unit>
+   
+    <!-- Junit lavaderov3 ORACLE hpenvy -->
+    <persistence-unit name="junitHP">
+    	<provider>org.hibernate.ejb.HibernatePersistence</provider>
+    	<!-- <class>org.openxava.web.editors.DiscussionComment</class> -->
+        <properties>
+			<property name="hibernate.connection.driver_class" value="oracle.jdbc.OracleDriver"/>
+			<property name="hibernate.dialect" value="org.hibernate.dialect.Oracle10gDialect"/>
+			<property name="hibernate.connection.url" value="jdbc:oracle:thin:@192.168.0.78:49161:xe"/>
+			<property name="hibernate.connection.username" value="manzanas"/>
+            <property name="hibernate.connection.password" value="googolplex123abc"/>
+        </properties>
+    </persistence-unit>    
+
+    <!-- Junit lavaderov3 - desde afuera -->
+    <persistence-unit name="junitOficina">
+    	<provider>org.hibernate.ejb.HibernatePersistence</provider>
+    	<!-- <class>org.openxava.web.editors.DiscussionComment</class> -->
+        <properties>
+			<property name="hibernate.connection.driver_class" value="oracle.jdbc.OracleDriver"/>
+			<property name="hibernate.dialect" value="org.hibernate.dialect.Oracle10gDialect"/>
+			<property name="hibernate.connection.url" value="jdbc:oracle:thin:@cafe.lcompras.biz:1521:xe"/>
+			<property name="hibernate.connection.username" value="manzanas"/>
+            <property name="hibernate.connection.password" value="googolplex123abc"/>
+        </properties>
+    </persistence-unit>    
+
+
+
+<!-- ejemplos SQLSERVER Microsoft of SYBASE
+
+    <persistence-unit name="jdbcJTDS">
+    	<provider>org.hibernate.ejb.HibernatePersistence</provider>
+        <properties>
+			<property name="hibernate.connection.driver_class" value="net.sourceforge.jtds.jdbc.Driver"/>
+			<property name="hibernate.dialect" value="org.hibernate.dialect.SQLServerDialect"/>
+			<property name="hibernate.connection.url" value="jdbc:jtds:sqlserver://192.168.0.136:1433/peluqueria"/>
+			<property name="hibernate.connection.username" value="xxxx"/>
+			<property name="hibernate.connection.password" value="yyyy"/>			
+        </properties>
+-->    
+
+
+<!-- ejemplo para MYSQL
+
+    <persistence-unit name="junit">
+         <provider>org.hibernate.ejb.HibernatePersistence</provider>
+         <properties>
+             <property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver"/>
+             <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect"/>
+             <property name="hibernate.connection.url" value="jdbc:mysql://localhost:3306/peluqueria"/>
+             <property name="hibernate.connection.username" value="xxx"/>
+             <property name="hibernate.connection.password" value="yyyy"/>
+         </properties>
+     </persistence-unit>
+
+
+-->
+</persistence>
