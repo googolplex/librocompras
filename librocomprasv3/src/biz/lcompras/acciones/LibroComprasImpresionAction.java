@@ -7,15 +7,21 @@ import net.sf.jasperreports.engine.*;
 
 public class LibroComprasImpresionAction  extends JasperReportBaseAction {
 
-	
 	@Override
 	protected JRDataSource getDataSource() throws Exception {
 		// return new JREmptyDataSource();
 		// si le devuelves null se le devuelve la conexion JDBC, para usar el SQL dentro del reporte
 		// http://www.openxava.org/OpenXavaDoc/apidocs/org/openxava/actions/JasperReportBaseAction.html#getDataSource()
+
 		return null;
 	}
 
+	public void execute() throws Exception {
+		super.execute();
+		addMessage("Impresion del Libro");
+	}	
+	
+	
 	@Override
 	protected String getJRXML() throws Exception {
 		// return "/home/xoldfusion/Descargas/librocompras2017/jasperfeliz/prueba3.jrxml" ; // lo leo del file system
@@ -27,8 +33,9 @@ public class LibroComprasImpresionAction  extends JasperReportBaseAction {
 	protected Map<String,String> getParameters() throws Exception {
 		Map<String,String> parametros = new HashMap<String,String>() ;
 		// yo creo que no se va a usar porque tengo la clase donde pongo los parametros
-		parametros.put("p_yyyymm","201701");
-		parametros.put("p_contribuyente","581069");
+		// parametros.put("p_yyyymm","201701");
+		// parametros.put("p_contribuyente","581069");
+		// parametros.put("REPORT_CONNECTION", "jdbc:postgresql://52.207.31.88:5432/manzanas?user=manzanas&password=googolplex124abc");
 		// return parametros ;
 		return null ;
 	}

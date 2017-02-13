@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="librocompraspg2" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" whenNoDataType="AllSectionsNoDetail" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="librocompraspg3" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" whenNoDataType="AllSectionsNoDetail" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
 	<property name="ireport.zoom" value="1.5"/>
-	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="15"/>
+	<property name="ireport.x" value="321"/>
+	<property name="ireport.y" value="43"/>
 	<property name="ireport.jasperserver.reportUnit" value="/reports/casaderoger/librocompras_1"/>
 	<property name="ireport.jasperserver.url" value="http://pecerafeliz.lcompras.biz/jasperserver/services/repository"/>
 	<property name="ireport.scriptlethandling" value="0"/>
@@ -385,7 +385,7 @@ order by tipomov, lc_fecha]]>
 		</band>
 	</pageFooter>
 	<summary>
-		<band height="40" splitType="Stretch">
+		<band height="59" splitType="Stretch">
 			<line>
 				<reportElement key="line" positionType="FixRelativeToBottom" x="0" y="6" width="802" height="1"/>
 				<graphicElement>
@@ -404,6 +404,20 @@ order by tipomov, lc_fecha]]>
 				</textElement>
 				<text><![CDATA[librocompraspg3.jrxml]]></text>
 			</staticText>
+			<textField>
+				<reportElement x="338" y="12" width="368" height="20"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{REPORT_DATA_SOURCE}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="338" y="32" width="368" height="20"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{REPORT_CONNECTION}]]></textFieldExpression>
+			</textField>
 		</band>
 	</summary>
 </jasperReport>
