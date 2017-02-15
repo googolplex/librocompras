@@ -7,7 +7,7 @@ public class VistaLibroComprasBean {
 	private Double version ;
 	private Long  	q22 ;
 	private Long cta_codigo ;
-	private Date lc_fecha ;
+	private String lc_fecha ;
 	private String contribuyente ;
 	private String fecha ;
 	private String proveedor;
@@ -66,10 +66,11 @@ public class VistaLibroComprasBean {
 	public void setCte_codigo(Long cte_codigo) {
 		this.cte_codigo = cte_codigo;
 	}
-	public Date getLc_fecha() {
+
+	public String getLc_fecha() {
 		return lc_fecha;
 	}
-	public void setLc_fecha(Date lc_fecha) {
+	public void setLc_fecha(String lc_fecha) {
 		this.lc_fecha = lc_fecha;
 	}
 	public Long getCta_codigo() {

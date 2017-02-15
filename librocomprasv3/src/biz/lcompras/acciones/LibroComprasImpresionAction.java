@@ -17,10 +17,14 @@ public class LibroComprasImpresionAction  extends JasperReportBaseAction {
 
 
 	Connection con = null ;
+	Collection<VistaLibroComprasBean> miColeccion = null;	
+	JRBeanCollectionDataSource beanColDataSource = null ;
 	
 	@Override
 	protected JRDataSource getDataSource() throws Exception {
-		JRBeanCollectionDataSource beanColDataSource = null ;
+		
+		// java.util.Vector miColeccion = null ;
+
 		// return new JREmptyDataSource();
 		// si le devuelves null se le devuelve la conexion JDBC, para usar el SQL dentro del reporte
 		// http://www.openxava.org/OpenXavaDoc/apidocs/org/openxava/actions/JasperReportBaseAction.html#getDataSource()
@@ -40,17 +44,27 @@ public class LibroComprasImpresionAction  extends JasperReportBaseAction {
         ps.close();
         // solo para debug
         
+        // para listar arrays por la consola
         // for(VistaLibroComprasBean mb : listafeliz){
         //    System.out.println(mb.getLc_numerofactura());
         // }        
         // http://stackoverflow.com/questions/22340535/how-to-show-jrbeancollectiondatasource-data-in-ireport-table
-        beanColDataSource = new JRBeanCollectionDataSource(listafeliz);
         
+        miColeccion = listafeliz ;  
+        		        
 		} catch (Exception e ){
 			e.printStackTrace();
 		}
 		
 		// return null;
+		
+		// para lista colecciones por la consola
+        // for(VistaLibroComprasBean mb : miColeccion){
+        //    System.out.println(mb.getLc_numerofactura());
+        //	}
+		
+        beanColDataSource = new JRBeanCollectionDataSource(miColeccion);
+        
 		return beanColDataSource ;
 	}
 
@@ -64,7 +78,9 @@ public class LibroComprasImpresionAction  extends JasperReportBaseAction {
 	protected String getJRXML() throws Exception {
 		// return "/home/xoldfusion/Descargas/librocompras2017/jasperfeliz/prueba3.jrxml" ; // lo leo del file system
 		// return "biz/lcompras/informes/prueba3.jrxml"; // lo leo del classpath 
-		return "biz/lcompras/informes/librocompraspg3.jrxml"; // lo leo del classpath
+
+		// return "biz/lcompras/informes/librocompraspg3.jrxml"; // lo leo del classpath
+		return "biz/lcompras/informes/librocompraspgbeans.jrxml"; // lo leo del classpath
 	}
 
 	@Override
