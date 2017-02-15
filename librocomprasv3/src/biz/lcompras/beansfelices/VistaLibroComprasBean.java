@@ -1,7 +1,13 @@
 package biz.lcompras.beansfelices;
 
+import java.sql.*;
+
 public class VistaLibroComprasBean {
+	private Double id ;
+	private Double version ;
 	private Long  	q22 ;
+	private Long cta_codigo ;
+	private Date lc_fecha ;
 	private String contribuyente ;
 	private String fecha ;
 	private String proveedor;
@@ -15,6 +21,75 @@ public class VistaLibroComprasBean {
 	private String lc_numerofactura ;
 	private Long tiva ;
 	private String tipomov ;
+	private Long cte_codigo ;
+	private Date datecreated ;
+	private Date lastupdated ;
+	private String usuario ;
+	private String modificadopor ;
+	private String yyyymm ;
+	
+
+	
+	public Date getDatecreated() {
+		return datecreated;
+	}
+	public void setDatecreated(Date datecreated) {
+		this.datecreated = datecreated;
+	}
+	public Date getLastupdated() {
+		return lastupdated;
+	}
+	public void setLastupdated(Date lastupdated) {
+		this.lastupdated = lastupdated;
+	}
+	public String getUsuario() {
+		return usuario;
+	}
+	public void setUsuario(String usuario) {
+		this.usuario = usuario;
+	}
+	public String getModificadopor() {
+		return modificadopor;
+	}
+	public void setModificadopor(String modificadopor) {
+		this.modificadopor = modificadopor;
+	}
+	public String getYyyymm() {
+		return yyyymm;
+	}
+	public void setYyyymm(String yyyymm) {
+		this.yyyymm = yyyymm;
+	}
+	public Long getCte_codigo() {
+		return cte_codigo;
+	}
+	public void setCte_codigo(Long cte_codigo) {
+		this.cte_codigo = cte_codigo;
+	}
+	public Date getLc_fecha() {
+		return lc_fecha;
+	}
+	public void setLc_fecha(Date lc_fecha) {
+		this.lc_fecha = lc_fecha;
+	}
+	public Long getCta_codigo() {
+		return cta_codigo;
+	}
+	public void setCta_codigo(Long cta_codigo) {
+		this.cta_codigo = cta_codigo;
+	}
+	public Double getVersion() {
+		return version;
+	}
+	public void setVersion(Double version) {
+		this.version = version;
+	}
+	public Double getId() {
+		return id;
+	}
+	public void setId(Double id) {
+		this.id = id;
+	}
 	public Long getQ22() {
 		return q22;
 	}

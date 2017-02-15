@@ -8,6 +8,7 @@ import org.openxava.util.*;
 
 import biz.lcompras.beansfelices.*;
 import net.sf.jasperreports.engine.*;
+import net.sf.jasperreports.engine.data.*;
 import net.sf.jasperreports.engine.fill.*;
 import org.apache.commons.dbutils.BeanProcessor;
 
@@ -19,6 +20,7 @@ public class LibroComprasImpresionAction  extends JasperReportBaseAction {
 	
 	@Override
 	protected JRDataSource getDataSource() throws Exception {
+		JRBeanCollectionDataSource beanColDataSource = null ;
 		// return new JREmptyDataSource();
 		// si le devuelves null se le devuelve la conexion JDBC, para usar el SQL dentro del reporte
 		// http://www.openxava.org/OpenXavaDoc/apidocs/org/openxava/actions/JasperReportBaseAction.html#getDataSource()
@@ -30,23 +32,26 @@ public class LibroComprasImpresionAction  extends JasperReportBaseAction {
 		PreparedStatement ps = con.prepareStatement("select * from vista_librocompras k order by tipomov, lc_fecha");
 		ResultSet rs = ps.executeQuery();
 		BeanProcessor bp = new BeanProcessor();
-		ArrayList<VistaLibroComprasBean> list = new ArrayList<VistaLibroComprasBean>();		
+		ArrayList<VistaLibroComprasBean> listafeliz = new ArrayList<VistaLibroComprasBean>();		
 		while(rs.next()) {
-			list.add((VistaLibroComprasBean) bp.toBean(rs, VistaLibroComprasBean.class));
+			listafeliz.add((VistaLibroComprasBean) bp.toBean(rs, VistaLibroComprasBean.class));
 		}
         rs.close();
         ps.close();
         // solo para debug
         
-        // for(VistaLibroComprasBean mb : list){
+        // for(VistaLibroComprasBean mb : listafeliz){
         //    System.out.println(mb.getLc_numerofactura());
         // }        
+        // http://stackoverflow.com/questions/22340535/how-to-show-jrbeancollectiondatasource-data-in-ireport-table
+        beanColDataSource = new JRBeanCollectionDataSource(listafeliz);
         
 		} catch (Exception e ){
 			e.printStackTrace();
 		}
 		
-		return null;
+		// return null;
+		return beanColDataSource ;
 	}
 
 	public void execute() throws Exception {
