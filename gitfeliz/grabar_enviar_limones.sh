@@ -12,5 +12,5 @@ cp  amazon2017llave/*.sh librocompras/amazon2017llave
 rm *.*~
 cd librocompras
 git add -A
-git commit -a -m "usare colecciones con Jr virtualizer"
+git commit -a -m "bueno ya funcionan los fonts"
 git push -u origin master

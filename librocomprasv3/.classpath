@@ -9,5 +9,6 @@
 	<classpathentry kind="lib" path="web/WEB-INF/lib/postgresql-9.4.1212.jre7.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
 	<classpathentry kind="lib" path="/home/xoldfusion/Descargas/openxava-5.6_librocompras/tomcat/lib/commons-dbutils-1.6.jar"/>
+	<classpathentry kind="lib" path="/home/xoldfusion/Descargas/openxava-5.6_librocompras/workspace/librocomprasv3/web/WEB-INF/lib/fuentesTtsv2-0.0.1-SNAPSHOT.jar"/>
 	<classpathentry kind="output" path="web/WEB-INF/classes"/>
 </classpath>

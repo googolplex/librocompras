@@ -44,3 +44,9 @@ https://sourceforge.net/p/openxava/discussion/437013/thread/d2401ff3/
 error: Impossible to translate id 
 poner https://sourceforge.net/p/qamanager/discussion/780347/thread/6430ce41/
 i18nWarnings=false
+
+
+#agregado para que no explote el librocompras informe 2017.02
+CATALINA_OPTS="-Djava.awt.headless=true"
+
+vamos por el tema fonts
