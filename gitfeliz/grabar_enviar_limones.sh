@@ -9,6 +9,7 @@ cp -r openshiftfeliz librocompras/
 cp -r jasperfeliz librocompras/
 cp  amazon2017llave/*.sh librocompras/amazon2017llave
 cp  amazon2017llave/vpn_feliz/*.sh librocompras/amazon2017llave/vpn_feliz
+cp  amazon2017llave/vpn_feliz/*.conf librocompras/amazon2017llave/vpn_feliz
 # cp  amazon2017llave/*.war librocompras/amazon2017llave ### no llevo el war porque no es necesario
 rm *.*~
 cd librocompras
