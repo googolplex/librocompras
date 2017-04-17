@@ -13,5 +13,5 @@ cp  amazon2017llave/vpn_feliz/*.sh librocompras/amazon2017llave/vpn_feliz
 rm *.*~
 cd librocompras
 git add -A
-git commit -a -m "agrego la VPN feliz"
+git commit -a -m "agrego la VPN feliz - me faltan las rutas"
 git push -u origin master
