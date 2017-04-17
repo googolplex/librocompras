@@ -50,3 +50,5 @@ i18nWarnings=false
 CATALINA_OPTS="-Djava.awt.headless=true"
 
 vamos por el tema fonts
+
+2017.4.17a. El tema VPN lo agrego con la receta que encontre en digital ocean strongswan
